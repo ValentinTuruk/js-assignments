@@ -680,7 +680,7 @@ function group(array, keySelector, valueSelector) {
          map.set(country, flatArrayCities);
       }
    })
-   console.log(map);
+   return map;
 }
 
 group(cityList,
