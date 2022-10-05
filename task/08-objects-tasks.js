@@ -10,7 +10,7 @@
 
 
 /**
- * Returns the rectagle object with width and height parameters and getArea() method
+ * 1) Returns the rectagle object with width and height parameters and getArea() method
  *
  * @param {number} width
  * @param {number} height
@@ -23,12 +23,17 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+    this.width = width;
+    this.height = height;
+    this.getArea = function () {
+        return this.width * this.height;
+    }
 }
 
+const r = new Rectangle(10, 20);
 
 /**
- * Returns the JSON representation of specified object
+ * 2) Returns the JSON representation of specified object
  *
  * @param {object} obj
  * @return {string}
@@ -38,12 +43,14 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+    const jsonObject = JSON.stringify(obj);
+    return jsonObject;
 }
 
+getJSON({ width: 10, height: 20 });
 
 /**
- * Returns the object of specified type from JSON representation
+ * 3) Returns the object of specified type from JSON representation
  *
  * @param {Object} proto
  * @param {string} json
@@ -54,8 +61,11 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+    const jsObject = JSON.parse(json, proto);
+    return jsObject;
 }
+
+fromJSON(Rectangle.prototype, '{"width":10, "height":20}');
 
 
 /**
@@ -108,31 +118,31 @@ function fromJSON(proto, json) {
 
 const cssSelectorBuilder = {
 
-    element: function(value) {
+    element: function (value) {
         throw new Error('Not implemented');
     },
 
-    id: function(value) {
+    id: function (value) {
         throw new Error('Not implemented');
     },
 
-    class: function(value) {
+    class: function (value) {
         throw new Error('Not implemented');
     },
 
-    attr: function(value) {
+    attr: function (value) {
         throw new Error('Not implemented');
     },
 
-    pseudoClass: function(value) {
+    pseudoClass: function (value) {
         throw new Error('Not implemented');
     },
 
-    pseudoElement: function(value) {
+    pseudoElement: function (value) {
         throw new Error('Not implemented');
     },
 
-    combine: function(selector1, combinator, selector2) {
+    combine: function (selector1, combinator, selector2) {
         throw new Error('Not implemented');
     },
 };
