@@ -261,7 +261,7 @@ function getRectangleString(width, height) {
         const bottom = '└' + '─'.repeat(width - 2) + '┘';
         const middle = '│' + ' '.repeat(width - 2) + '│\n';
         const figure = `${top}${middle.repeat(height - 2)}${bottom}`;
-        console.log(figure);
+        return figure;
     } throw new Error('Entered data is invalid');
 }
 
@@ -286,7 +286,7 @@ getRectangleString(20, 13);
 function encodeToRot13(str) {
     if (typeof str === 'string') {
         let iteration = [];
-        for (i of str) {
+        for (let i of str) {
             let letter = String.fromCodePoint(i.charCodeAt() + 13);
             if (i >= 'A' && i <= 'Z' && letter < 'Z') {
                 iteration.push(letter);
