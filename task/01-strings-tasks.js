@@ -258,7 +258,7 @@ extractEmails('angus.young@gmail.com;brian.johnson@hotmail.com;bon.scott@yahoo.c
 function getRectangleString(width, height) {
     if (typeof width === 'number' && typeof height === 'number') {
         const top = '┌' + '─'.repeat(width - 2) + '┐\n';
-        const bottom = '└' + '─'.repeat(width - 2) + '┘';
+        const bottom = '└' + '─'.repeat(width - 2) + '┘\n';
         const middle = '│' + ' '.repeat(width - 2) + '│\n';
         const figure = `${top}${middle.repeat(height - 2)}${bottom}`;
         return figure;
@@ -288,12 +288,12 @@ function encodeToRot13(str) {
         let iteration = [];
         for (let i of str) {
             let letter = String.fromCodePoint(i.charCodeAt() + 13);
-            if (i >= 'A' && i <= 'Z' && letter < 'Z') {
+            if (i >= 'A' && i <= 'Z' && letter <= 'Z') {
                 iteration.push(letter);
             } else if (i >= 'A' && i <= 'Z' && letter > 'Z') {
                 letter = String.fromCodePoint(i.charCodeAt() - 13);
                 iteration.push(letter);
-            } else if (i >= 'a' && i <= 'z' && letter < 'z') {
+            } else if (i >= 'a' && i <= 'z' && letter <= 'z') {
                 iteration.push(letter);
             } else if (i >= 'a' && i <= 'z' && letter > 'z') {
                 letter = String.fromCodePoint(i.charCodeAt() - 13);
@@ -324,7 +324,7 @@ encodeToRot13('Gb trg gb gur bgure fvqr!');
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    return typeof (`value`) === 'string'
+    return typeof (value) === 'string'
 }
 
 isString('Valentin');
