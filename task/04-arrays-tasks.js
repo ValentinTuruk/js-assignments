@@ -83,7 +83,7 @@ doubleArray(['Ace', 10, true]);
  */
 function getArrayOfPositives(arr) {
    const positivArray = [];
-   arr.forEach((item) => {
+   arr.map((item) => {
       if (item > 0) {
          positivArray.push(item);
       }
@@ -106,7 +106,7 @@ getArrayOfPositives([-1, 2, -5, -4, 0]);
  */
 function getArrayOfStrings(arr) {
    const arrayOfStrings = [];
-   arr.forEach((item) => {
+   arr.map((item) => {
       if (typeof (item) === 'string') {
          arrayOfStrings.push(item);
       }
@@ -131,7 +131,7 @@ getArrayOfStrings([0, 1, 'cat', 3, true, 'dog']);
  */
 function removeFalsyValues(arr) {
    const arrayOfTrulyValues = [];
-   arr.forEach((item) => {
+   arr.map((item) => {
       if (item) {
          arrayOfTrulyValues.push(item);
       }
@@ -247,7 +247,8 @@ getTail(['a', 'b', 'c', 'd'], 3);
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-   return arr.join(',');
+   return arr.join('\n');
+
 }
 
 toCsvText([
@@ -291,7 +292,7 @@ toArrayOfSquares([0, 1, 2, 3, 4, 5, 10, 100, -1]);
 function getMovingSum(arr) {
    let arrayOfSums = [];
    let sum = 0;
-   arr.forEach((item) => {
+   arr.map((item) => {
       sum += item
       arrayOfSums.push(sum);
    }, 0);
@@ -313,7 +314,7 @@ getMovingSum([10, -10, 10, -10, 10]);
  */
 function getSecondItems(arr) {
    const everySecond = [];
-   arr.forEach((item, index) => {
+   arr.map((item, index) => {
       if (index % 2 === 1) {
          everySecond.push(item);
       }
@@ -340,7 +341,7 @@ getSecondItems([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'a', 'b', 'c', null])
  */
 function propagateItemsByPositionIndex(arr) {
    let arrayOfArrays = []
-   arr.forEach((item, index, array) => {
+   arr.map((item, index, array) => {
       const middleArray = new Array(index + 1);
       middleArray.fill(item);
       arrayOfArrays.push(middleArray);
@@ -444,7 +445,7 @@ getItemsSum([1, 10, 100, 1000]);
  */
 function getFalsyValuesCount(arr) {
    const falsyValues = [];
-   arr.forEach(item => {
+   arr.map(item => {
       if (!item) {
          falsyValues.push(item);
       }
@@ -567,7 +568,7 @@ function getIdentityMatrix(n) {
    const array = Array(n).fill(0);
    const arrayOfArrays = new Array(n);
 
-   array.forEach((item, index) => {
+   array.map((item, index) => {
       const childArray = Array(n).fill(0);
       childArray[index] = 1;
       arrayOfArrays[index] = childArray;
@@ -667,7 +668,7 @@ const cityList = [
 function group(array, keySelector, valueSelector) {
    const map = new Map();
 
-   array.forEach((item, index, array) => {
+   array.map((item, index, array) => {
       const country = keySelector(item);
       const city = valueSelector(item);
       if (!map.has(country)) {
@@ -723,9 +724,10 @@ selectMany(['one', 'two', 'three'], x => x.split(''));
  */
 function getElementByIndexes(arr, indexes) {
    let currentArrayLevel = arr;
-   for (let i of indexes) {
-      currentArrayLevel = currentArrayLevel[i];
-   }
+   indexes.map((value) => {
+      currentArrayLevel = currentArrayLevel[value];
+   })
+
    return currentArrayLevel;
 }
 
@@ -757,9 +759,12 @@ function swapHeadAndTail(arr) {
       arrTailHead.push(arr[Math.floor(arr.length / 2)])
    }
 
-   for (let i = 0; i < Math.floor(arr.length / 2); ++i) {
-      arrTailHead.push(arr[i]);
-   }
+   arr.map((item, index, arr) => {
+      if (index < Math.floor(arr.length / 2)) {
+         arrTailHead.push(arr[index]);
+      }
+   })
+
    return arrTailHead;
 }
 
