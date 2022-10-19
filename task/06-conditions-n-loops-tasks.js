@@ -153,13 +153,14 @@ function doRectanglesOverlap(rect1, rect2) {
     let matchHeight = false;
     let matchWidth = false;
 
-    if ((rect1.top <= rect2.top && rect1.top + rect1.height >= rect2.top) || (rect1.top <= rect2.top + rect2.height && rect1.top + rect1.height >= rect2.top + rect2.height)) {
+    if ((rect1.top <= rect2.top && rect1.top + rect1.height >= rect2.top) || (rect1.top <= rect2.top + rect2.height && rect1.top + rect1.height >= rect2.top)) {
         matchHeight = true;
-    } else if ((rect1.left <= rect2.left && rect1.left + rect1.width >= rect2.left) || (rect1.left <= rect2.left + rect2.width && rect1.left + rect1.width >= rect2.left + rect2.width)) {
+    }
+    if ((rect1.left <= rect2.left && rect1.left + rect1.width >= rect2.left) || (rect1.left <= rect2.left + rect2.width && rect1.left + rect1.width >= rect2.left)) {
         matchWidth = true;
     }
 
-    return matchHeight || matchWidth;
+    return matchHeight && matchWidth;
 }
 
 doRectanglesOverlap({ top: 0, left: 0, width: 10, height: 10 }, { top: 5, left: 5, width: 20, height: 20 });
@@ -194,7 +195,7 @@ function isInsideCircle(circle, point) {
     const sideOne = circle.center.x - point.x;
     const sideTwo = circle.center.y - point.y;
     const extention = Math.sqrt(sideOne ** 2 + sideTwo ** 2);
-    return extention <= circle.radius ? true : false;
+    return extention < circle.radius ? true : false;
 }
 
 isInsideCircle({ center: { x: 0, y: 0 }, radius: 10 }, { x: 0, y: 0 });
@@ -253,7 +254,10 @@ findFirstSingleChar('entente');
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
     const firstPoint = isStartIncluded ? '[' : '(';
     const secondPoint = isEndIncluded ? ']' : ')';
-    return `${firstPoint}${a}, ${b}${secondPoint}`;
+    if (a < b) {
+        return `${firstPoint}${a}, ${b}${secondPoint}`;
+    } return `${firstPoint}${b}, ${a}${secondPoint}`;
+
 }
 
 getIntervalString(0, 1, true, true);
@@ -487,25 +491,33 @@ function timespanToHumanString(startDate, endDate) {
     const period = (new Date(endDate - startDate) / 1000);
     let notification;
 
-    if (0 <= period && period < 45) {
+    if (0 <= period && period <= 45) {
         notification = 'a few seconds ago';
-    } else if (45 <= period && period < 90) {
+    } else if (45 < period && period <= 90) {
         notification = 'a minute ago';
-    } else if (90 <= period && period < 45 * 60) {
-        notification = `${Math.round(period / 60)} minutes ago`;
-    } else if (45 * 60 <= period && period < 90 * 60) {
+    } else if (90 < period && period <= 45 * 60) {
+        if (period % 60 <= 30) {
+            notification = `${Math.floor(period / 60)} minutes ago`;
+        } else {
+            notification = `${Math.ceil(period / 60)} minutes ago`;
+        }
+    } else if (45 * 60 < period && period <= 90 * 60) {
         notification = 'an hour ago';
-    } else if (90 * 60 <= period && period < 22 * 60 * 60) {
-        notification = `${Math.round(period / 60 / 60)} hours ago`;
-    } else if (22 * 60 * 60 <= period && period < 36 * 60 * 60) {
+    } else if (90 * 60 < period && period <= 22 * 60 * 60) {
+        if (period / 60 % 60 <= 30) {
+            notification = `${Math.floor(period / 60 / 60)} hours ago`;
+        } else {
+            notification = `${Math.ceil(period / 60 / 60)} hours ago`;
+        }
+    } else if (22 * 60 * 60 < period && period <= 36 * 60 * 60) {
         notification = 'a day ago';
-    } else if (36 * 60 * 60 <= period && period < 25 * 24 * 60 * 60) {
+    } else if (36 * 60 * 60 < period && period <= 25 * 24 * 60 * 60) {
         notification = `${Math.round(period / 24 / 60 / 60)} days ago`;
-    } else if (25 * 24 * 60 * 60 <= period && period < 45 * 24 * 60 * 60) {
+    } else if (25 * 24 * 60 * 60 < period && period <= 45 * 24 * 60 * 60) {
         notification = `a month ago`;
-    } else if (45 * 24 * 60 * 60 <= period && period < 345 * 24 * 60 * 60) {
+    } else if (45 * 24 * 60 * 60 < period && period <= 345 * 24 * 60 * 60) {
         notification = `${Math.round(period / 30 / 24 / 60 / 60)} months ago`;
-    } else if (345 * 24 * 60 * 60 <= period && period <= 545 * 24 * 60 * 60) {
+    } else if (345 * 24 * 60 * 60 < period && period <= 545 * 24 * 60 * 60) {
         notification = `a year ago`;
     } else if (546 * 24 * 60 * 60 <= period) {
         notification = `${Math.round(period / 365 / 24 / 60 / 60)} years ago`;
