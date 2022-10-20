@@ -324,7 +324,9 @@ encodeToRot13('Gb trg gb gur bgure fvqr!');
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    return typeof (value) === 'string'
+    if (value !== undefined && value !== null && value !== NaN) {
+        return typeof (value.valueOf()) === 'string'
+    } return false
 }
 
 isString('Valentin');
