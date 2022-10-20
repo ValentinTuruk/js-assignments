@@ -61,7 +61,10 @@ getJSON({ width: 10, height: 20 });
  *
  */
 function fromJSON(proto, json) {
-    const jsObject = JSON.parse(json, proto);
+    const object = JSON.parse(json);
+    const arr = Object.values(object);
+    const jsObject = new proto.constructor(...arr);
+
     return jsObject;
 }
 
@@ -119,23 +122,28 @@ fromJSON(Rectangle.prototype, '{"width":10, "height":20}');
 const cssSelectorBuilder = {
 
     element: function (value) {
-        throw new Error('Not implemented');
+        this.value = value
+        return this.value
     },
 
     id: function (value) {
-        throw new Error('Not implemented');
+        this.value = value
+        return `#${this.value}`
     },
 
     class: function (value) {
-        throw new Error('Not implemented');
+        this.value = value
+        return `.${this.value}`
     },
 
     attr: function (value) {
-        throw new Error('Not implemented');
+        this.value = value
+        return `[${this.value}]`
     },
 
     pseudoClass: function (value) {
-        throw new Error('Not implemented');
+        this.value = value
+        return `:${this.value}`
     },
 
     pseudoElement: function (value) {
