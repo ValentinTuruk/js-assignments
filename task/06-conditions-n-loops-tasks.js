@@ -512,7 +512,11 @@ function timespanToHumanString(startDate, endDate) {
     } else if (22 * 60 * 60 < period && period <= 36 * 60 * 60) {
         notification = 'a day ago';
     } else if (36 * 60 * 60 < period && period <= 25 * 24 * 60 * 60) {
-        notification = `${Math.round(period / 24 / 60 / 60)} days ago`;
+        if (period / 60 / 60 % 24 <= 12) {
+            notification = `${Math.floor(period / 24 / 60 / 60)} days ago`;
+        } else {
+            notification = `${Math.ceil(period / 24 / 60 / 60)} days ago`;
+        }
     } else if (25 * 24 * 60 * 60 < period && period <= 45 * 24 * 60 * 60) {
         notification = `a month ago`;
     } else if (45 * 24 * 60 * 60 < period && period <= 345 * 24 * 60 * 60) {
