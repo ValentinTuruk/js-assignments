@@ -333,10 +333,10 @@ reverseInteger(87354);
 function isCreditCardNumber(ccn) {
     const checkDigit = String(ccn).slice(-1);
     const str = String(ccn).slice(0, -1);
-    const arr = str.split('');
+    const arr = str.split('').reverse();
     let sum = 0;
     for (let i = 0; i < arr.length; ++i) {
-        if (!(i % 2) || i === 0) {
+        if ((i % 2)) {
             sum += +arr[i];
         } else {
             if (2 * + arr[i] > 9) {
@@ -348,7 +348,9 @@ function isCreditCardNumber(ccn) {
             }
         }
     }
-    return (sum % 10 === 10 - checkDigit);
+
+    console.log(sum)
+    return ((10 - (sum % 10)) % 10 === +checkDigit);
 }
 
 isCreditCardNumber(79927398713);
