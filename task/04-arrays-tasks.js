@@ -39,8 +39,23 @@ findElement(['Array', 'Number', 'string'], 'Date');
  *    2 => [ 1, 3 ] 
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
-let arr = [1];
+
+// First way
 function generateOdds(len) {
+   const arr = Array(len).fill(0);
+   const oddNumbersArray = arr.map((value, index) => {
+      return 1 + index * 2;
+   })
+
+   return oddNumbersArray;
+}
+
+generateOdds(5);
+
+
+// Second way
+let arr = [1];
+function generateOddsTwo(len) {
    if (arr.length < len) {
       arr.push(arr[arr.length - 1] + 2);
       generateOdds(len)
@@ -49,7 +64,7 @@ function generateOdds(len) {
    return arr;
 }
 
-generateOdds(5);
+generateOddsTwo(5);
 
 
 /**
