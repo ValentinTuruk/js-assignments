@@ -683,11 +683,11 @@ const cityList = [
 function group(array, keySelector, valueSelector) {
    const map = new Map();
 
-   array.map((item, index, array) => {
+   array.map((item) => {
       const country = keySelector(item);
       const city = valueSelector(item);
       if (!map.has(country)) {
-         map.set(country, city)
+         map.set(country, [city])
       } else {
          let arrayAddCity = [];
          arrayAddCity.push(map.get(country));
