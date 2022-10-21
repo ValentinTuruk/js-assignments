@@ -63,7 +63,7 @@ getCicleCircumference(5);
  */
 function getAverage(value1, value2) {
     if (typeof value1 === 'number' && typeof value2 === 'number') {
-        return (value1 + value2) / 2;
+        return (value1 / 2 + value2 / 2);
     } throw new Error('Numbers should be entered');
 }
 
