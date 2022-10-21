@@ -128,12 +128,22 @@ function angleBetweenClockHands(date) {
    const hours = date.getUTCHours();
    const minutes = date.getUTCMinutes();
    let angleGrad;
-
+ 
    if (hours <= 12) {
       angleGrad = (hours + (minutes / 60)) * 30 - minutes * 6;
    } else {
       angleGrad = ((hours - 12) + (minutes / 60)) * 30 - minutes * 6;
    }
+
+   if (angleGrad <= 0) {
+      angleGrad = - angleGrad;
+   } 
+
+   if (angleGrad > 180 ) {
+      angleGrad = 360 - angleGrad;
+   }
+
+
    const angleRadian = angleGrad * Math.PI / 180;
    return angleRadian;
 }
