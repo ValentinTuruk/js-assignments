@@ -120,39 +120,79 @@ fromJSON(Rectangle.prototype, '{"width":10, "height":20}');
  */
 
 const cssSelectorBuilder = {
+    elementValue: '',
+    idValue: '',
+    classValue: '',
+    attrValue: '',
+    pseudoClassValue: '',
+    pseudoElementValue: '',
+    selector1: '',
+    combinator: '',
+    selector2: '',
+
+
+    stringify: function () {
+        const cssSelector = this.elementValue + this.idValue + this.classValue + this.attrValue + this.pseudoClassValue + this.pseudoElementValue + this.selector1 + this.combinator + this.selector2;
+        this.elementValue = '';
+        this.idValue = '';
+        this.classValue = '';
+        this.attrValue = '';
+        this.pseudoClassValue = '';
+        this.pseudoElementValue = '';
+        this.selector1 = '';
+        this.combinator = '';
+        this.selector2 = '';
+        return cssSelector;
+    },
 
     element: function (value) {
-        this.value = value
-        return this.value
+        this.elementValue = `${this.elementValue}${value}`;
+        return cssSelectorBuilder;
     },
 
     id: function (value) {
-        this.value = value
-        return `#${this.value}`
+        this.idValue = `${this.idValue}#${value}`;
+        return cssSelectorBuilder;
     },
 
     class: function (value) {
-        this.value = value
-        return `.${this.value}`
+        this.classValue = `${this.classValue}.${value}`;
+        return cssSelectorBuilder;
     },
 
     attr: function (value) {
-        this.value = value
-        return `[${this.value}]`
+        this.attrValue = `${this.attrValue}[${value}]`;
+        return cssSelectorBuilder;
     },
 
     pseudoClass: function (value) {
-        this.value = value
-        return `:${this.value}`
+        this.pseudoClassValue = `${this.pseudoClassValue}:${value}`;
+        return cssSelectorBuilder;
     },
 
     pseudoElement: function (value) {
-        throw new Error('Not implemented');
+        this.pseudoElementValue = `${this.pseudoElementValue}::${value}`;
+        return cssSelectorBuilder;
     },
 
     combine: function (selector1, combinator, selector2) {
-        throw new Error('Not implemented');
+        this.selector1 = selector1.collect();
+        this.combinator = combinator;
+        this.selector2 = selector2.collect();
+        return cssSelectorBuilder;
     },
+
+    collect: function () {
+        const cssSelector = this.elementValue + this.idValue + this.classValue + this.attrValue + this.pseudoClassValue + this.pseudoElementValue;
+        this.elementValue = '';
+        this.idValue = '';
+        this.classValue = '';
+        this.attrValue = '';
+        this.pseudoClassValue = '';
+        this.pseudoElementValue = '';
+        return cssSelector;        
+    }
+
 };
 
 
