@@ -126,13 +126,12 @@ const cssSelectorBuilder = {
     attrValue: '',
     pseudoClassValue: '',
     pseudoElementValue: '',
-    selector1: '',
+    selectorOne: '',
     combinator: '',
-    selector2: '',
-
+    selectorTwo: '',
 
     stringify: function () {
-        const cssSelector = this.elementValue + this.idValue + this.classValue + this.attrValue + this.pseudoClassValue + this.pseudoElementValue + this.selector1 + this.combinator + this.selector2;
+        const cssSelector = `${this.elementValue}${this.idValue}${this.classValue}${this.attrValue}${this.pseudoClassValue}${this.pseudoElementValue}${this.selectorOne}${this.combinator}${this.selectorTwo}`;
         this.elementValue = '';
         this.idValue = '';
         this.classValue = '';
@@ -146,52 +145,80 @@ const cssSelectorBuilder = {
     },
 
     element: function (value) {
-        this.elementValue = `${this.elementValue}${value}`;
-        return cssSelectorBuilder;
+        if (!this.idValue && !this.classValue && !this.attrValue && !this.pseudoClassValue && !this.pseudoElementValue) {
+            if (!this.elementValue) {
+                this.elementValue = value;
+            } else throw new Error("Element, id and pseudo-element should not occur more then one time inside the selector");
+
+            return cssSelectorBuilder;
+
+        } else throw new Error("Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element");
     },
 
     id: function (value) {
-        this.idValue = `${this.idValue}#${value}`;
-        return cssSelectorBuilder;
+        if (!this.classValue && !this.attrValue && !this.pseudoClassValue && !this.pseudoElementValue) {
+            if (!this.idValue) {
+                this.idValue = `#${value}`;
+            } else throw new Error("Element, id and pseudo-element should not occur more then one time inside the selector");
+
+            return cssSelectorBuilder;
+
+        } else throw new Error("Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element");
     },
 
     class: function (value) {
-        this.classValue = `${this.classValue}.${value}`;
-        return cssSelectorBuilder;
+        if (!this.attrValue && !this.pseudoClassValue && !this.pseudoElementValue) {
+            this.classValue = `${this.classValue}.${value}`;
+
+            return cssSelectorBuilder;
+
+        } else throw new Error("Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element");
     },
 
     attr: function (value) {
-        this.attrValue = `${this.attrValue}[${value}]`;
-        return cssSelectorBuilder;
+        if (!this.pseudoClassValue && !this.pseudoElementValue) {
+            this.attrValue = `${this.attrValue}[${value}]`;
+
+            return cssSelectorBuilder;
+
+        } else throw new Error("Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element");
     },
 
     pseudoClass: function (value) {
-        this.pseudoClassValue = `${this.pseudoClassValue}:${value}`;
-        return cssSelectorBuilder;
+        if (!this.pseudoElementValue) {
+            this.pseudoClassValue = `${this.pseudoClassValue}:${value}`;
+
+            return cssSelectorBuilder;
+
+        } else throw new Error("Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element");
     },
 
     pseudoElement: function (value) {
-        this.pseudoElementValue = `${this.pseudoElementValue}::${value}`;
+        if (!this.pseudoElementValue) {
+            this.pseudoElementValue = `::${value}`;
+        } else throw new Error("Element, id and pseudo-element should not occur more then one time inside the selector");
+
         return cssSelectorBuilder;
     },
 
-    combine: function (selector1, combinator, selector2) {
-        this.selector1 = selector1.collect();
+    combine: function (selectorOne, combinator, selectorTwo) {
+        this.selectorOne = selectorOne.collect();
         this.combinator = combinator;
-        this.selector2 = selector2.collect();
+        this.selectorTwo = selectorTwo.collect();
+
         return cssSelectorBuilder;
     },
 
     collect: function () {
-        const cssSelector = this.elementValue + this.idValue + this.classValue + this.attrValue + this.pseudoClassValue + this.pseudoElementValue;
+        const cssSelectorForCombine = `${this.elementValue}${this.idValue}${this.classValue}${this.attrValue}${this.pseudoClassValue}${this.pseudoElementValue}`;
         this.elementValue = '';
         this.idValue = '';
         this.classValue = '';
         this.attrValue = '';
         this.pseudoClassValue = '';
         this.pseudoElementValue = '';
-        return cssSelector;        
-    }
+        return cssSelectorForCombine;
+    },
 
 };
 
