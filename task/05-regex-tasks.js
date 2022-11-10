@@ -9,7 +9,7 @@
 
 
 /**
- * Returns the regexp that matches a GUID string representation
+ * 1) Returns the regexp that matches a GUID string representation
  * '{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}',
  * where X is hexadecimal digit (0,1,2...,9,A,a,B,b,C,c,D,d,F,f)
  *
@@ -31,8 +31,30 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-   throw new Error('Not implemented');
-}
+   const regexp = /{[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-\d[A-Za-z0-9]{11}}/;
+   return regexp;
+
+
+   // const arreyToCHeck = str.slice(1, -1).split('-');
+
+   // if (arreyToCHeck.length === 5 &&
+   //    arreyToCHeck[0].length === 8 &&
+   //    arreyToCHeck[1].length === 4 &&
+   //    arreyToCHeck[2].length === 4 &&
+   //    arreyToCHeck[3].length === 4 &&
+   //    arreyToCHeck[4].length === 12) {
+   //    const symbolsCeck = arreyToCHeck.join('');
+   //    const matchIterable = symbolsCeck.match(/\w/g) || [];
+   //    const matchString = matchIterable.join('');
+   //    return symbolsCeck === matchString ? true : false;
+
+   // } return false;
+
+};
+
+getRegexForGuid('{3F2504E0-4F89-41D3-9A0C-0305E82C3301}');
+
+
 
 
 /**
@@ -121,9 +143,9 @@ function getPasswordValidator(minLength) {
 
 
 module.exports = {
-    getRegexForGuid: getRegexForGuid,
-    getRegexForPitSpot: getRegexForPitSpot,
-    getRegexForIPv4: getRegexForIPv4,
-    getRegexForSSN: getRegexForSSN,
-    getPasswordValidator: getPasswordValidator
+   getRegexForGuid: getRegexForGuid,
+   getRegexForPitSpot: getRegexForPitSpot,
+   getRegexForIPv4: getRegexForIPv4,
+   getRegexForSSN: getRegexForSSN,
+   getPasswordValidator: getPasswordValidator
 };
