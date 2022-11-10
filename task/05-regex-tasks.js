@@ -104,7 +104,7 @@ function getRegexForSSN() {
 
 
 /**
- * Returns the password validator regex.
+ * 5) Returns the password validator regex.
  * Regex will validate a password to make sure it meets the follwing criteria:
  *  - At least specified characters long (argument minLength)
  *  - Contains a lowercase letter
@@ -124,7 +124,8 @@ function getRegexForSSN() {
  *   'Pa55'.match(validator) => false
  */
 function getPasswordValidator(minLength) {
-   throw new Error('Not implemented');
+   const regexp = new RegExp(`^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[A-Za-z0-9]{${minLength},}`);
+   return regexp;
 }
 
 
