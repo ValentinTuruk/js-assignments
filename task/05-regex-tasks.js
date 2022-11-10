@@ -33,23 +33,6 @@
 function getRegexForGuid() {
    const regexp = /{[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-\d[A-Za-z0-9]{11}}/;
    return regexp;
-
-
-   // const arreyToCHeck = str.slice(1, -1).split('-');
-
-   // if (arreyToCHeck.length === 5 &&
-   //    arreyToCHeck[0].length === 8 &&
-   //    arreyToCHeck[1].length === 4 &&
-   //    arreyToCHeck[2].length === 4 &&
-   //    arreyToCHeck[3].length === 4 &&
-   //    arreyToCHeck[4].length === 12) {
-   //    const symbolsCeck = arreyToCHeck.join('');
-   //    const matchIterable = symbolsCeck.match(/\w/g) || [];
-   //    const matchString = matchIterable.join('');
-   //    return symbolsCeck === matchString ? true : false;
-
-   // } return false;
-
 };
 
 getRegexForGuid('{3F2504E0-4F89-41D3-9A0C-0305E82C3301}');
@@ -58,7 +41,7 @@ getRegexForGuid('{3F2504E0-4F89-41D3-9A0C-0305E82C3301}');
 
 
 /**
- * Returns the regexp that matches all the strings from first column
+ * 2) Returns the regexp that matches all the strings from first column
  * but of them from the second
  *
  * Match :                 Do not match:
@@ -75,7 +58,8 @@ getRegexForGuid('{3F2504E0-4F89-41D3-9A0C-0305E82C3301}');
  *
  */
 function getRegexForPitSpot() {
-   throw new Error('Not implemented');
+   const regexp = /p.t/;
+   return regexp;
 }
 
 
