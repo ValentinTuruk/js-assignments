@@ -31,7 +31,7 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-   const regexp = /{[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-\d[A-Za-z0-9]{11}}/;
+   const regexp = /{[A-Za-z0-9]{8}(-[A-Za-z0-9]{4}){3}-\d[A-Za-z0-9]{11}}/;
    return regexp;
 };
 
@@ -64,7 +64,7 @@ function getRegexForPitSpot() {
 
 
 /**
- * Returns the regexp that matches all IPv4 strings in
+ * 3) Returns the regexp that matches all IPv4 strings in
  * 'XX.XX.XX.XX' dotted format where XX is number 0 to 255
  *
  * Valid IPv4:                       Invalid IPv4
@@ -78,7 +78,8 @@ function getRegexForPitSpot() {
  * @return {RegExp}
  */
 function getRegexForIPv4() {
-   throw new Error('Not implemented');
+   const regexp = /^([0-9]|00[0-9]|[1-9][0-9]|0[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.(([0-9]|00[0-9]|[1-9][0-9]|0[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){2}([0-9]|00[0-9]|[1-9][0-9]|0[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
+   return regexp;
 }
 
 
