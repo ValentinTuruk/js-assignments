@@ -10,7 +10,7 @@
 
 
 /**
- * Returns the lines sequence of "99 Bottles of Beer" song:
+ * 1) Returns the lines sequence of "99 Bottles of Beer" song:
  *
  *  '99 bottles of beer on the wall, 99 bottles of beer.'
  *  'Take one down and pass it around, 98 bottles of beer on the wall.'
@@ -33,7 +33,20 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    let quantity = 99
+    while (quantity > 2) {
+        yield `${quantity} bottles of beer on the wall, ${quantity} bottles of beer.`;
+        yield `Take one down and pass it around, ${quantity - 1} bottles of beer on the wall.`;
+        quantity--;
+    }
+    yield `${quantity} bottles of beer on the wall, ${quantity} bottles of beer.`;
+    yield `Take one down and pass it around, ${quantity - 1} bottle of beer on the wall.`;
+    quantity--;
+    yield `${quantity} bottle of beer on the wall, ${quantity} bottle of beer.`;
+    yield `Take one down and pass it around, no more bottles of beer on the wall.`;
+    yield `No more bottles of beer on the wall, no more bottles of beer.`;
+    yield `Go to the store and buy some more, 99 bottles of beer on the wall.`;
+    quantity--;
 }
 
 
