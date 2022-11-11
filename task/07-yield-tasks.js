@@ -51,7 +51,7 @@ function* get99BottlesOfBeer() {
 
 
 /**
- * Returns the Fibonacci sequence:
+ * 2) Returns the Fibonacci sequence:
  *   0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, ...
  *
  * See more at: https://en.wikipedia.org/wiki/Fibonacci_number
@@ -60,7 +60,18 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    let numberOne = 0;
+    let numberTwo = 1;
+
+    yield numberOne;
+    yield numberTwo;
+
+    for (let i = 0; i < 1; i) {
+        let sum = numberOne + numberTwo;
+        yield sum;
+        numberOne = numberTwo;
+        numberTwo = sum;
+    }
 }
 
 
