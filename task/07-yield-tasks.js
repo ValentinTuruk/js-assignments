@@ -118,7 +118,7 @@ function* depthTraversalTree(root) {
 
 
 /**
- * Traverses a tree using the breadth-first strategy
+ * 4) Traverses a tree using the breadth-first strategy
  * See details: https://en.wikipedia.org/wiki/Breadth-first_search
  *
  * Each node have child nodes in node.children array.
@@ -140,11 +140,12 @@ function* depthTraversalTree(root) {
  */
 function* breadthTraversalTree(root) {
     throw new Error('Not implemented');
+
 }
 
 
 /**
- * Merges two yield-style sorted sequences into the one sorted sequence.
+ * 5) Merges two yield-style sorted sequences into the one sorted sequence.
  * The result sequence consists of sorted items from source iterators.
  *
  * @params {Iterable.<number>} source1
@@ -157,7 +158,15 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    const arr1 = Array.from(source1);
+    const arr2 = Array.from(source2);
+
+    const sortArray = arr1.concat(arr2).sort((a, b) => a - b);
+
+    for (let i; i<sortArray.length; ++i) {
+        yield i;
+    }
+
 }
 
 
