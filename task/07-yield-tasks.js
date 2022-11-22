@@ -76,7 +76,7 @@ function* getFibonacciSequence() {
 
 
 /**
- * Traverses a tree using the depth-first strategy
+ * 3) Traverses a tree using the depth-first strategy
  * See details: https://en.wikipedia.org/wiki/Depth-first_search
  *
  * Each node have child nodes in node.children array.
@@ -106,7 +106,14 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+    yield root.n;
+
+    if (root.children) {
+        for (let a = 0; a < root.children.length; ++a) {
+            depthTraversalTree(root.children[a]);
+
+        }
+    }
 }
 
 
