@@ -25,8 +25,8 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.acos(x))
  *
  */
-function getComposition(f,g) {
-    return function resulrFunction (x) {
+function getComposition(f, g) {
+    return function resulrFunction(x) {
         const resultG = g(x);
         return f(resultG);
     }
@@ -50,8 +50,8 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    return function power (x) {
-        const fitstResult = x**exponent;
+    return function power(x) {
+        const fitstResult = x ** exponent;
         return fitstResult;
     }
 }
@@ -70,11 +70,24 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-    return function polynom (a, b ,c ) {
-       return (y = a*x^2 + b*x + c);
-    }
+function getPolynom(a, b, c) {
+
+    if (c) {
+        return function polynom(x) {
+            return a * x ** 2 + b * x + c;
+        }
+    } else if (b) {
+        return function polynom(x) {
+            return a * x + b;
+        }
+    } else if (a) {
+        return function polynom(x) {
+            return a;
+        }
+    } return null
+
 }
+
 
 
 /**
