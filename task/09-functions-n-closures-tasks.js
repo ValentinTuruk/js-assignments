@@ -34,7 +34,7 @@ function getComposition(f,g) {
 
 
 /**
- * Returns the math power function with the specified exponent
+ * 2) Returns the math power function with the specified exponent
  *
  * @param {number} exponent
  * @return {Function}
@@ -50,7 +50,10 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    throw new Error('Not implemented');
+    return function power (x) {
+        const fitstResult = x**exponent;
+        return fitstResult;
+    }
 }
 
 
