@@ -58,7 +58,7 @@ function getPowerFunction(exponent) {
 
 
 /**
- * Returns the polynom function of one argument based on specified coefficients.
+ * 3) Returns the polynom function of one argument based on specified coefficients.
  * See: https://en.wikipedia.org/wiki/Polynomial#Definition
  *
  * @params {integer}
@@ -71,7 +71,9 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom() {
-    throw new Error('Not implemented');
+    return function polynom (a, b ,c ) {
+       return (y = a*x^2 + b*x + c);
+    }
 }
 
 
