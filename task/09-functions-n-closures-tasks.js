@@ -91,7 +91,7 @@ function getPolynom(a, b, c) {
 
 
 /**
- * Memoizes passed function and returns function
+ * 4) Memoizes passed function and returns function
  * which invoked first time calls the passed function and then always returns cached result.
  *
  * @params {Function} func - function to memoize
@@ -105,7 +105,14 @@ function getPolynom(a, b, c) {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+    let value;
+    function worker() {
+        if (!value) {
+            value = func();
+            return value;
+        } return value;
+    }
+    return worker;
 }
 
 
