@@ -117,7 +117,7 @@ function memoize(func) {
 
 
 /**
- * Returns the function trying to call the passed function and if it throws,
+ * 5) Returns the function trying to call the passed function and if it throws,
  * retrying it specified number of attempts.
  *
  * @param {Function} func
@@ -132,12 +132,22 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-    throw new Error('Not implemented');
+
+    function processor() {
+        for (let i = 0; i < attempts; ++i) {
+            try {
+                func()
+                return i
+            } catch {
+            }
+        }
+    }
+    return processor;
 }
 
 
 /**
- * Returns the logging wrapper for the specified method,
+ * 6) Returns the logging wrapper for the specified method,
  * Logger has to log the start and end of calling the specified function.
  * Logger has to log the arguments of invoked function.
  * The fromat of output log is:
