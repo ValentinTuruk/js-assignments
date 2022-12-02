@@ -137,7 +137,7 @@ function retry(func, attempts) {
         for (let i = 0; i < attempts; ++i) {
             try {
                 func()
-                return i
+                return func()
             } catch {
             }
         }
