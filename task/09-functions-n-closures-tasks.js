@@ -175,7 +175,7 @@ function logger(func, logFunc) {
 
 
 /**
- * Return the function with partial applied arguments
+ * 7) Return the function with partial applied arguments
  *
  * @param {Function} fn
  * @return {Function}
@@ -188,7 +188,18 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn) {
-    throw new Error('Not implemented');
+    let secondLevelString = '';
+
+    for (let i = 1; i < arguments.length; ++i) {
+        secondLevelString += arguments[i]
+    }
+
+    return function allArg(fn) {
+        for (let i = 0; i < arguments.length; ++i) {
+            secondLevelString += arguments[i]
+        }
+        return secondLevelString;
+    }
 }
 
 
