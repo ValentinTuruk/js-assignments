@@ -204,7 +204,7 @@ function partialUsingArguments(fn) {
 
 
 /**
- * Returns the id generator function that returns next integer starting from specified number every time when invoking.
+ * 8) Returns the id generator function that returns next integer starting from specified number every time when invoking.
  *
  * @param {Number} startFrom
  * @return {Function}
@@ -220,7 +220,12 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    throw new Error('Not implemented');
+    let value = startFrom-1;
+    function worker() {
+        value += 1
+        return value;
+    }
+    return worker;
 }
 
 
