@@ -170,8 +170,18 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-    throw new Error('Not implemented');
+    let mainLog = []
+
+    return function recorder(...arg) {
+        let call = [];
+        call.push(logFunc(`${func.name}(${arg}) starts`));
+        call.push(logFunc(`${func.name}(${arg}) ends`));
+        mainLog.push(call)
+
+        return func(arg);
+    }
 }
+
 
 
 /**
@@ -220,7 +230,7 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    let value = startFrom-1;
+    let value = startFrom - 1;
     function worker() {
         value += 1
         return value;
