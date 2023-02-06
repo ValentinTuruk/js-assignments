@@ -26,6 +26,12 @@ function findElement(arr, value) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function findElementLo(arr, value) {
+   return _.indexOf(arr, value);
+}
+
 /**
  * Generates an array of odd numbers of the specified length
  * 
@@ -57,6 +63,11 @@ function doubleArray(arr) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function doubleArrayLo(arr) {
+   return _.concat(arr, arr);
+}
 
 /**
  * Returns an array of positive numbers from the specified array in original order
@@ -73,6 +84,12 @@ function getArrayOfPositives(arr) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getArrayOfPositivesLo(arr) {
+   return _.filter(arr, (i) => { return i > 0 })
+}
+
 /**
  * Returns the array with strings only in the specified array (in original order)
  * 
@@ -86,6 +103,12 @@ function getArrayOfPositives(arr) {
  */
 function getArrayOfStrings(arr) {
    throw new Error('Not implemented');
+}
+
+// Lodash
+
+function getArrayOfStringsLo(arr) {
+   return _.filter(arr, (i) => { return typeof (i) === 'string' })
 }
 
 /**
@@ -104,6 +127,14 @@ function getArrayOfStrings(arr) {
 function removeFalsyValues(arr) {
    throw new Error('Not implemented');
 }
+
+// Lodash
+
+function removeFalsyValuesLo(arr) {
+   return _.compact(arr);
+}
+
+removeFalsyValuesLo([false, 0, NaN, '', undefined, 'cat', NaN, true, ''])
 
 /**
  * Returns the array of useprcase strings from the specified array
@@ -134,6 +165,12 @@ function getStringsLength(arr) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getUpperCaseStringsLo(arr) {
+   return _.map(arr, (i) => { return _.upperCase(i) });
+}
+
 /**
  * Inserts the item into specified array at specified index
  * 
@@ -147,6 +184,12 @@ function getStringsLength(arr) {
  */
 function insertItem(arr, item, index) {
    throw new Error('Not implemented');
+}
+
+// Lodash
+
+function getStringsLengthLo(arr) {
+   return _.map(arr, i => i.length);
 }
 
 /**
@@ -163,6 +206,11 @@ function getHead(arr, n) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getHeadLo(arr, n) {
+   return _.take(arr, n);
+}
 
 /**
  * Returns the n last items of the specified array
@@ -178,6 +226,11 @@ function getTail(arr, n) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getTailLo(arr, n) {
+   return _.takeRight(arr, n);
+}
 
 /**
  * Returns CSV represebtation of two-dimentional numeric array.
@@ -203,6 +256,19 @@ function toCsvText(arr) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function toCsvTextLo(arr) {
+   return _.join(arr, ',')
+}
+
+toCsvTextLo([
+   [0, 1, 2, 3, 4],
+   [10, 11, 12, 13, 14],
+   [20, 21, 22, 23, 24],
+   [30, 31, 32, 33, 34]
+]);
+
 /**
  * Transforms the numeric array into the according array of squares:
  *   f(x) = x * x
@@ -218,6 +284,14 @@ function toArrayOfSquares(arr) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function toArrayOfSquaresLo(arr) {
+   function square(i) {
+      return i ** 2
+   }
+   return _.map(arr, square);
+}
 
 /**
  * Transforms the numeric array to the according moving sum array:
@@ -237,6 +311,18 @@ function getMovingSum(arr) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getMovingSumLo(arr) {
+   let arrayOfSums = [];
+   let sum = 0;
+   _.forEach(arr, (item) => {
+      sum += item
+      arrayOfSums.push(sum);
+   }, 0);
+   return (arrayOfSums);
+}
+
 /**
  * Returns every second item from the specified array:
  * 
@@ -252,6 +338,13 @@ function getSecondItems(arr) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getSecondItemsLo(arr) {
+   return _.remove(arr, (item, index) => {
+      return index % 2 === 1
+   });
+}
 
 /**
  * Propagates every item in sequence its position times
@@ -271,6 +364,15 @@ function propagateItemsByPositionIndex(arr) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function propagateItemsByPositionIndexLo(arr) {
+   const arrayOfArrays = _.map(arr, (item, index) => {
+      return _.fill(Array(index + 1), item);
+   });
+
+   return _.flatten(arrayOfArrays);
+}
 
 /** 
  * Returns the 3 largest numbers from the specified array
@@ -289,7 +391,12 @@ function get3TopItems(arr) {
    throw new Error('Not implemented');
 }
  
- 
+// Lodash
+
+function get3TopItemsLo(arr) {
+   return _.take(arr.sort((a, b) => b - a), 3);
+} 
+
 /**  
  * Returns the number of positive numbers from specified array
  * 
@@ -307,6 +414,12 @@ function getPositivesCount(arr) {
    throw new Error('Not implemented');
 }
  
+// Lodash
+
+function getPositivesCountLo(arr) {
+   return _.filter(arr, item => _.isNumber(item) && item > 0).length;
+}
+
 /** 
  * Sorts digit names
  * 
@@ -322,6 +435,17 @@ function getPositivesCount(arr) {
  */
 function sortDigitNamesByNumericOrder(arr) {
    throw new Error('Not implemented');
+}
+
+// Lodash
+
+function sortDigitNamesByNumericOrderLo(arr) {
+   const digitList = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+   function sort(a, b) {
+      return _.indexOf(digitList, a) - _.indexOf(digitList, b)
+   }
+   return _.sortBy(arr, sort);
+
 }
 
 /** 
@@ -340,6 +464,17 @@ function getItemsSum(arr) {
    throw new Error('Not implemented');
 }
  
+// Lodash
+
+function getItemsSumLo(arr) {
+   function sum(sum, item) {
+      return sum + item
+   }
+   return _.reduce(arr, sum, 0);
+}
+
+getItemsSumLo([1, 10, 100, 1000]);
+
 /** 
  * Returns the number of all falsy value in the specified array
  * 
@@ -354,6 +489,14 @@ function getItemsSum(arr) {
  */
 function getFalsyValuesCount(arr) {
    throw new Error('Not implemented');
+}
+
+// Lodash
+
+function getFalsyValuesCountLo(arr) {
+   const truthlyArray = _.compact(arr);
+   const falsyArray = _.difference(arr, truthlyArray);
+   return falsyArray.length;
 }
 
 /**
@@ -374,6 +517,21 @@ function findAllOccurences(arr, item) {
    throw new Error('Not implemented');
 }
 
+// Lodash #1
+
+function findAllOccurencesLo(arr, item) {
+   const baseLength = arr.length;
+   const lenthWithoutItem = _.pull(arr, item).length
+   return baseLength - lenthWithoutItem;
+}
+
+
+// Lodash #2
+
+function findAllOccurencesLoTwo(arr, item) {
+   return _.countBy(arr, (i) => i === item)[true];
+}
+
 /**
  * Concatenates all elements from specified array into single string with ',' delimeter  
  * 
@@ -389,6 +547,11 @@ function toStringList(arr) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function toStringListLo(arr) {
+   return _.join(arr, ',')
+}
 
 /**
  * Sorts the specified array by country name first and city name (if countries are equal) in ascending order.
@@ -418,6 +581,12 @@ function sortCitiesArray(arr) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function sortCitiesArrayLo(arr) {
+   return _.orderBy(arr, ['country', 'city'], ['asc', 'asc'])
+}
+
 /**
  * Creates an indentity matrix of the specified size
  * 
@@ -440,6 +609,20 @@ function getIdentityMatrix(n) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getIdentityMatrixLo(n) {
+   const zeroArray = _.fill(Array(n), 0);
+   const arrayOfArrays = new Array(n);
+
+   _.forEach(zeroArray, (item, index) => {
+      const childArray = _.fill(Array(n), 0);
+      childArray[index] = 1;
+      arrayOfArrays[index] = childArray;
+   })
+   return arrayOfArrays;
+}
+
 /**
  * Creates an array of integers from the specified start to end (inclusive)
  * 
@@ -457,6 +640,16 @@ function getIntervalArray(start, end) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getIntervalArrayLo(start, end) {
+   const arr = _.fill(Array(end - start + 1), 0);
+   const intervalArray = _.map(arr, (item, index) => {
+      return start + index;
+   })
+   return intervalArray
+}
+
 /**
  * Returns array containing only unique values from the specified array.
  *
@@ -470,6 +663,15 @@ function getIntervalArray(start, end) {
  */
 function distinct(arr) {
    throw new Error('Not implemented');
+}
+
+// Lodash
+
+function distinctLo(arr) {
+   return _.uniq(arr);
+   /* secong way
+      return _.intersection(arr);
+   */
 }
 
 /**
@@ -506,6 +708,26 @@ function group(array, keySelector, valueSelector) {
    throw new Error('Not implemented');
 }
 
+// Lodash
+
+function groupLo(array, keySelector, valueSelector) {
+   const a = _.groupBy(array, keySelector);
+   const map = new Map();
+
+   _.forEach(a, (i) => {
+      const countryName = keySelector(i[0]);
+      let cityNames = []
+
+      _.forEach(i, (item) => {
+         const city = valueSelector(item);
+         cityNames.push(city);
+      });
+
+      map.set(countryName, cityNames);
+   });
+
+   return map;
+}
 
 /**
  * Projects each element of the specified array to a sequence and flattens the resulting sequences into one array.
@@ -522,6 +744,12 @@ function selectMany(arr, childrenSelector) {
     throw new Error('Not implemented');
 }
 
+// Lodash
+
+function selectManyLo(arr, childrenSelector) {
+   const newArray = _.map(arr, childrenSelector);
+   return _.flatten(newArray);
+}
 
 /**
  * Returns an element from the multidimentional array by the specified indexes.
@@ -562,6 +790,24 @@ function swapHeadAndTail(arr) {
     throw new Error('Not implemented');
 }
 
+// Lodash
+
+function swapHeadAndTailLo(arr) {
+   const headLenght = _.floor(_.divide(arr.length, 2))
+
+   if (arr.length % 2 === 0) {
+      return _.flatten(
+                _.reverse(
+                  _.chunk(arr, headLenght)));
+   } else {
+      const arrayBuilder = [];
+      arrayBuilder.push(_.takeRight(arr, headLenght));
+      arrayBuilder.push(_.nth(arr, headLenght));
+      arrayBuilder.push(_.take(arr, headLenght));
+      return _.flatten(arrayBuilder);
+   }
+
+}
 
 module.exports = {
     findElement: findElement,
