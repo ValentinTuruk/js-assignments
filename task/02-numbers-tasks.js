@@ -25,6 +25,11 @@ function getRectangleArea(width, height) {
     throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getRectangleAreaLo(width, height) {
+    return _.multiply(width, height)
+}
 
 /**
  * Returns a circumference of circle given by radius.
@@ -41,6 +46,12 @@ function getCicleCircumference(radius) {
     throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getCicleCircumferenceLo(radius) {
+    return 2 * _.multiply(Math.PI, radius);
+}
+
 /**
  * Returns an average of two given numbers.
  *
@@ -55,6 +66,12 @@ function getCicleCircumference(radius) {
  */
 function getAverage(value1, value2) {
     throw new Error('Not implemented');
+}
+
+// Lodash
+
+function getAverageLo(value1, value2) {
+    return _.mean([value1, value2]);
 }
 
 /**
@@ -76,6 +93,12 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
     throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getDistanceBetweenPointsLo(x1, y1, x2, y2) {
+    return Math.sqrt(_.sum([Math.pow(_.subtract(x1, x2), 2), Math.pow(_.subtract(y2, y1), 2)]));
+}
+
 /**
  * Returns a root of linear equation a*x + b = 0 given by coefficients a and b.
  *
@@ -92,6 +115,11 @@ function getLinearEquationRoot(a, b) {
     throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getLinearEquationRootLo(a, b) {
+    return _.divide(_.subtract(0, b), a);
+}
 
 /**
  * Returns an angle (in radians) between two vectors given by xi and yi, coordinates in Cartesian plane
@@ -114,6 +142,14 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
     throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getAngleBetweenVectorsLo(x1, y1, x2, y2) {
+    const cos = _.divide(_.sum([_.multiply(x1, x2), _.multiply(y1, y2)]), _.multiply(Math.sqrt(_.sum([Math.pow(x1, 2), Math.pow(y1, 2)])), Math.sqrt(_.sum([Math.pow(x2, 2), Math.pow(y2, 2)]))));
+    const angleRadians = Math.acos(cos);
+    return angleRadians
+}
+
 /**
  * Returns a last digit of a integer number.
  *
@@ -130,6 +166,11 @@ function getLastDigit(value) {
     throw new Error('Not implemented');
 }
 
+// Lodash
+
+function getLastDigitLo(value) {
+    return _.toString(value).slice(-1);
+}
 
 /**
  * Returns a number by given string representation.
@@ -144,6 +185,12 @@ function getLastDigit(value) {
  */
 function parseNumberFromString(value) {
     throw new Error('Not implemented');
+}
+
+// Lodash
+
+function parseNumberFromStringLo(value) {
+    return _.toNumber(value);
 }
 
 /**
@@ -161,6 +208,12 @@ function parseNumberFromString(value) {
  */
 function getParallelipidedDiagonal(a,b,c) {
     throw new Error('Not implemented');
+}
+
+// Lodash
+
+function getParallelipidedDiagonalLo(a, b, c) {
+    return Math.sqrt(_.sum([Math.pow(a, 2), Math.pow(b, 2), Math.pow(c, 2)]));
 }
 
 /**
@@ -182,6 +235,12 @@ function getParallelipidedDiagonal(a,b,c) {
  */
 function roundToPowerOfTen(num, pow) {
     throw new Error('Not implemented');
+}
+
+// Lodash
+
+function roundToPowerOfTenLo(num, pow) {
+    return _.round(num, -pow);
 }
 
 /**
@@ -223,6 +282,12 @@ function isPrime(n) {
 function toNumber(value, def) {
     throw new Error('Not implemented');
 }
+
+// Lodash
+
+function toNumberLo(value, def) {
+    return _.toNumber(value) || def;
+ }
 
 module.exports = {
     getRectangleArea: getRectangleArea,
