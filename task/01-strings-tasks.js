@@ -58,6 +58,21 @@ function getStringFromTemplate(firstName, lastName) {
     throw new Error('Not implemented');
 }
 
+
+// Lodash #1
+
+function getStringFromTemplateLo(firstName, lastName) {
+    return _.replace('Hello, Name Surname!', 'Name Surname', `${firstName} ${lastName}`);
+}
+
+
+// Lodash #2
+
+function getStringFromTemplateLoTwo(firstName, lastName) {
+    const greeting = _.template('Hello, <%= client %>!');
+    return greeting({ 'client': `${firstName} ${lastName}` });
+}
+
 /**
  * Extracts a name from template string 'Hello, First_Name Last_Name!'.
  *
@@ -102,6 +117,12 @@ function removeLeadingAndTrailingWhitespaces(value) {
     throw new Error('Not implemented');
 }
 
+// Lodash
+
+function removeLeadingAndTrailingWhitespacesLo(value) {
+    return _.trim(value)
+}
+
 /**
  * Returns a string that repeated the specified number of times.
  *
@@ -115,6 +136,12 @@ function removeLeadingAndTrailingWhitespaces(value) {
  */
 function repeatString(value, count) {
     throw new Error('Not implemented');
+}
+
+// Lodash
+
+function repeatStringLo(value, count) {
+    return _.repeat(value, count);
 }
 
 /**
@@ -133,6 +160,12 @@ function removeFirstOccurrences(str, value) {
     throw new Error('Not implemented');
 }
 
+// Lodash
+
+function removeFirstOccurrencesLo(str, value) {
+    return _.replace(str, value, '');
+}
+
 /**
  * Remove the first and last angle brackets from tag string
  *
@@ -148,6 +181,11 @@ function unbracketTag(str) {
     throw new Error('Not implemented');
 }
 
+// Lodash
+
+function unbracketTagLo(str) {
+    return _.trim(str, '<>')
+}
 
 /**
  * Converts all characters of the specified string into the upper case
@@ -163,6 +201,12 @@ function convertToUpperCase(str) {
     throw new Error('Not implemented');
 }
 
+// Lodash
+
+function convertToUpperCaseLo(str) {
+    return _.toUpper(str);
+}
+
 /**
  * Extracts e-mails from single string with e-mails list delimeted by semicolons
  *
@@ -175,6 +219,12 @@ function convertToUpperCase(str) {
  */
 function extractEmails(str) {
     throw new Error('Not implemented');
+}
+
+// Lodash
+
+function extractEmailsLo(str) {
+    return _.split(str, ';');
 }
 
 /**
@@ -204,6 +254,16 @@ function getRectangleString(width, height) {
     throw new Error('Not implemented');
 }
 
+
+// Lodash
+
+function getRectangleStringLo(width, height) {
+    const top = '┌' + _.repeat('─', width - 2) + '┐\n';
+    const bottom = '└' + _.repeat('─', width - 2) + '┘';
+    const middle = '│' + _.repeat(' ', width - 2) + '│\n';
+    const figure = `${top}${_.repeat(middle, height - 2)}${bottom}`;
+    console.log(figure);
+}
 
 /**
  * Encode specified string with ROT13 cipher
