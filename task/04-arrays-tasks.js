@@ -28,6 +28,12 @@ function findElement(arr, value) {
 
 findElement(['Array', 'Number', 'string'], 'Date');
 
+// Lodash
+function findElementLo(arr, value) {
+   return _.indexOf(arr, value);
+}
+
+
 /**
  * 2) Generates an array of odd numbers of the specified length
  * 
@@ -84,6 +90,11 @@ function doubleArray(arr) {
 
 doubleArray(['Ace', 10, true]);
 
+// Lodash
+function doubleArrayLo(arr) {
+   return _.concat(arr, arr);
+}
+
 
 /**
  * 4) Returns an array of positive numbers from the specified array in original order
@@ -108,6 +119,12 @@ function getArrayOfPositives(arr) {
 
 getArrayOfPositives([-1, 2, -5, -4, 0]);
 
+// Lodash
+function getArrayOfPositivesLo(arr) {
+   return _.filter(arr, (i) => { return i > 0 })
+}
+
+
 /**
  * 5) Returns the array with strings only in the specified array (in original order)
  * 
@@ -130,6 +147,12 @@ function getArrayOfStrings(arr) {
 }
 
 getArrayOfStrings([0, 1, 'cat', 3, true, 'dog']);
+
+// Lodash
+function getArrayOfStringsLo(arr) {
+   return _.filter(arr, (i) => { return typeof (i) === 'string' })
+}
+
 
 /**
  * 6) Removes falsy values from the specified array
@@ -155,6 +178,12 @@ function removeFalsyValues(arr) {
 }
 
 removeFalsyValues([false, 0, NaN, '', undefined, 'cat', NaN, true, ''])
+
+// Lodash
+function removeFalsyValuesLo(arr) {
+   return _.compact(arr);
+}
+
 
 /**
  * 7) Returns the array of useprcase strings from the specified array
@@ -190,6 +219,12 @@ function getStringsLength(arr) {
 
 getStringsLength(['', 'a', 'bc', 'def', 'ghij', 'react', 'ember'])
 
+// Lodash
+function getUpperCaseStringsLo(arr) {
+   return _.map(arr, (i) => { return _.upperCase(i) });
+}
+
+
 /**
  * 9) Inserts the item into specified array at specified index
  * 
@@ -208,6 +243,12 @@ function insertItem(arr, item, index) {
 
 insertItem([1, 'b', 'c'], 'x', 0);
 
+// Lodash
+function getStringsLengthLo(arr) {
+   return _.map(arr, i => i.length);
+}
+
+
 /**
  * 10) Returns the n first items of the specified array
  * 
@@ -223,6 +264,11 @@ function getHead(arr, n) {
 }
 
 getHead(['a', 'b', 'c', 'd'], 3);
+
+// Lodash
+function getHeadLo(arr, n) {
+   return _.take(arr, n);
+}
 
 
 /**
@@ -240,6 +286,12 @@ function getTail(arr, n) {
 }
 
 getTail(['a', 'b', 'c', 'd'], 3);
+
+// Lodash
+function getTailLo(arr, n) {
+   return _.takeRight(arr, n);
+}
+
 
 /**
  * 12) Returns CSV represebtation of two-dimentional numeric array.
@@ -273,6 +325,13 @@ toCsvText([
    [30, 31, 32, 33, 34]
 ]);
 
+
+// Lodash
+function toCsvTextLo(arr) {
+   return _.join(arr, ',')
+}
+
+
 /**
  * 13) Transforms the numeric array into the according array of squares:
  *   f(x) = x * x
@@ -289,6 +348,15 @@ function toArrayOfSquares(arr) {
 }
 
 toArrayOfSquares([0, 1, 2, 3, 4, 5, 10, 100, -1]);
+
+// Lodash
+function toArrayOfSquaresLo(arr) {
+   function square(i) {
+      return i ** 2
+   }
+   return _.map(arr, square);
+}
+
 
 /**
  * 14) Transforms the numeric array to the according moving sum array:
@@ -316,6 +384,18 @@ function getMovingSum(arr) {
 
 getMovingSum([10, -10, 10, -10, 10]);
 
+// Lodash
+function getMovingSumLo(arr) {
+   let arrayOfSums = [];
+   let sum = 0;
+   _.forEach(arr, (item) => {
+      sum += item
+      arrayOfSums.push(sum);
+   }, 0);
+   return (arrayOfSums);
+}
+
+
 /**
  * 15) Returns every second item from the specified array:
  * 
@@ -338,6 +418,13 @@ function getSecondItems(arr) {
 }
 
 getSecondItems([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'a', 'b', 'c', null])
+
+// Lodash
+function getSecondItemsLo(arr) {
+   return _.remove(arr, (item, index) => {
+      return index % 2 === 1
+   });
+}
 
 
 /**
@@ -367,6 +454,15 @@ function propagateItemsByPositionIndex(arr) {
 
 propagateItemsByPositionIndex(['a', 'b', 'c', null]);
 
+// Lodash
+function propagateItemsByPositionIndexLo(arr) {
+   const arrayOfArrays = _.map(arr, (item, index) => {
+      return _.fill(Array(index + 1), item);
+   });
+
+   return _.flatten(arrayOfArrays);
+}
+
 
 /** 
  * 17) Returns the 3 largest numbers from the specified array
@@ -388,6 +484,12 @@ function get3TopItems(arr) {
 
 get3TopItems([1, 2, 3, 4, 10, 5, 6, 7, 8, 9, 10]);
 
+// Lodash
+function get3TopItemsLo(arr) {
+   return _.take(arr.sort((a, b) => b - a), 3);
+} 
+
+
 /**  
  * 18) Returns the number of positive numbers from specified array
  * 
@@ -406,6 +508,12 @@ function getPositivesCount(arr) {
 }
 
 getPositivesCount([-1, 0, 1, null, 1, 'elephant', '2']);
+
+// Lodash
+function getPositivesCountLo(arr) {
+   return _.filter(arr, item => _.isNumber(item) && item > 0).length;
+}
+
 
 /** 
  * 19) Sorts digit names
@@ -428,6 +536,17 @@ function sortDigitNamesByNumericOrder(arr) {
 
 sortDigitNamesByNumericOrder(['one', 'one', 'one', 'zero', 'one', 'two', 'three', 'nine', 'eight', 'nine', 'eight']);
 
+// Lodash
+function sortDigitNamesByNumericOrderLo(arr) {
+   const digitList = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+   function sort(a, b) {
+      return _.indexOf(digitList, a) - _.indexOf(digitList, b)
+   }
+   return _.sortBy(arr, sort);
+
+}
+
+
 /** 
  * 20) Returns the sum of all items in the specified array of numbers
  * 
@@ -445,6 +564,15 @@ function getItemsSum(arr) {
 }
 
 getItemsSum([1, 10, 100, 1000]);
+ 
+// Lodash
+function getItemsSumLo(arr) {
+   function sum(sum, item) {
+      return sum + item
+   }
+   return _.reduce(arr, sum, 0);
+}
+
 
 /** 
  * 21) Returns the number of all falsy value in the specified array
@@ -470,6 +598,14 @@ function getFalsyValuesCount(arr) {
 
 getFalsyValuesCount([-1, 'false', null, 0, 1, '', 3, null, undefined, NaN, false, 0, '']);
 
+// Lodash
+function getFalsyValuesCountLo(arr) {
+   const truthlyArray = _.compact(arr);
+   const falsyArray = _.difference(arr, truthlyArray);
+   return falsyArray.length;
+}
+
+
 /**
  * 22) Returns a number of all occurences of the specified item in an array  
  * 
@@ -490,6 +626,19 @@ function findAllOccurences(arr, item) {
 
 findAllOccurences([true, 0, 1, 'true'], true);
 
+// Lodash #1
+function findAllOccurencesLo(arr, item) {
+   const baseLength = arr.length;
+   const lenthWithoutItem = _.pull(arr, item).length
+   return baseLength - lenthWithoutItem;
+}
+
+// Lodash #2
+function findAllOccurencesLoTwo(arr, item) {
+   return _.countBy(arr, (i) => i === item)[true];
+}
+
+
 /**
  * 23) Concatenates all elements from specified array into single string with ',' delimeter  
  * 
@@ -506,6 +655,11 @@ function toStringList(arr) {
 }
 
 toStringList([0, false, 'cat', NaN, true, '']);
+
+// Lodash
+function toStringListLo(arr) {
+   return _.join(arr, ',')
+}
 
 
 /**
@@ -561,6 +715,12 @@ function sortCitiesArray(arr) {
 
 sortCitiesArray(list);
 
+// Lodash
+function sortCitiesArrayLo(arr) {
+   return _.orderBy(arr, ['country', 'city'], ['asc', 'asc'])
+}
+
+
 /**
  * 25) Creates an indentity matrix of the specified size
  * 
@@ -594,6 +754,20 @@ function getIdentityMatrix(n) {
 
 getIdentityMatrix(5);
 
+// Lodash
+function getIdentityMatrixLo(n) {
+   const zeroArray = _.fill(Array(n), 0);
+   const arrayOfArrays = new Array(n);
+
+   _.forEach(zeroArray, (item, index) => {
+      const childArray = _.fill(Array(n), 0);
+      childArray[index] = 1;
+      arrayOfArrays[index] = childArray;
+   })
+   return arrayOfArrays;
+}
+
+
 /**
  * 26) Creates an array of integers from the specified start to end (inclusive)
  * 
@@ -618,6 +792,15 @@ function getIntervalArray(start, end) {
 
 getIntervalArray(-2, 27);
 
+// Lodash
+function getIntervalArrayLo(start, end) {
+   const arr = _.fill(Array(end - start + 1), 0);
+   const intervalArray = _.map(arr, (item, index) => {
+      return start + index;
+   })
+   return intervalArray
+}
+
 
 /**
  * 27) Returns array containing only unique values from the specified array.
@@ -637,6 +820,15 @@ function distinct(arr) {
 }
 
 distinct([1, 1, 2, 2, 3, 3, 4, 4]);
+
+// Lodash
+function distinctLo(arr) {
+   return _.uniq(arr);
+   /* secong way
+      return _.intersection(arr);
+   */
+}
+
 
 /**
  * 28) Groups elements of the specified array by key.
@@ -704,6 +896,26 @@ group(cityList,
    item => item.city
 );
 
+// Lodash
+function groupLo(array, keySelector, valueSelector) {
+   const a = _.groupBy(array, keySelector);
+   const map = new Map();
+
+   _.forEach(a, (i) => {
+      const countryName = keySelector(i[0]);
+      let cityNames = []
+
+      _.forEach(i, (item) => {
+         const city = valueSelector(item);
+         cityNames.push(city);
+      });
+
+      map.set(countryName, cityNames);
+   });
+
+   return map;
+}
+
 
 /**
  * 29) Projects each element of the specified array to a sequence and flattens the resulting sequences into one array.
@@ -723,6 +935,12 @@ function selectMany(arr, childrenSelector) {
 }
 
 selectMany(['one', 'two', 'three'], x => x.split(''));
+
+// Lodash
+function selectManyLo(arr, childrenSelector) {
+   const newArray = _.map(arr, childrenSelector);
+   return _.flatten(newArray);
+}
 
 
 /**
@@ -784,6 +1002,24 @@ function swapHeadAndTail(arr) {
 }
 
 swapHeadAndTail([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+// Lodash
+function swapHeadAndTailLo(arr) {
+   const headLenght = _.floor(_.divide(arr.length, 2))
+
+   if (arr.length % 2 === 0) {
+      return _.flatten(
+                _.reverse(
+                  _.chunk(arr, headLenght)));
+   } else {
+      const arrayBuilder = [];
+      arrayBuilder.push(_.takeRight(arr, headLenght));
+      arrayBuilder.push(_.nth(arr, headLenght));
+      arrayBuilder.push(_.take(arr, headLenght));
+      return _.flatten(arrayBuilder);
+   }
+
+}
 
 
 module.exports = {
