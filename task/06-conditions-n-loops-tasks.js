@@ -229,6 +229,18 @@ function findFirstSingleChar(str) {
 
 findFirstSingleChar('entente');
 
+// Lodash
+function findFirstSingleCharLo(str) {
+    let uniqArray = _.uniq(_.split(str, ''));
+
+    for (i of uniqArray) {
+        const quantity = _.filter(str, (item) => item === i);
+        if (quantity.length === 1) return i;
+        if (quantity.length === 1) break;
+    }
+    return null;
+}
+
 
 /**
  * 8) Returns the string representation of math interval, specified by two points and include / exclude flags.
@@ -285,6 +297,12 @@ function reverseString(str) {
 
 reverseString('The quick brown fox jumps over the lazy dog');
 
+// Lodash
+function reverseStringLo(str) {
+    return _.join(_.reverse(_.split(str, '')), '')
+}
+
+
 /**
  * 10) Reverse the specified integer number (put all digits in reverse order)
  *
@@ -308,6 +326,15 @@ function reverseInteger(num) {
 }
 
 reverseInteger(87354);
+
+// Lodash
+function reverseIntegerLo(num) {
+    return _.toInteger(
+        _.join(
+            _.reverse(
+                _.split(
+                    _.toString(num), '')), ''));
+}
 
 
 /**
@@ -379,6 +406,13 @@ function getDigitalRoot(num) {
 }
 
 getDigitalRoot(165536);
+
+// Loldash
+function getDigitalRootLo(num) {
+    const sumForTaskEleveen = _.reduce(_.split(_.toString(num), ''), (sum, i) => sum + i);
+    return sumForTaskEleveen > 9 ? getDigitalRoot(sumForTaskEleveen) : sumForTaskEleveen;
+}
+
 
 /**
  * 13) Returns true if the specified string has the balanced brackets and false otherwise.
@@ -559,6 +593,12 @@ function toNaryString(num, n) {
 }
 
 toNaryString(1024, 2)
+
+// Lodash
+function toNaryString(num, n) {
+    return _.parseInt(num, 10).toString(n);
+}
+
 
 /**
  * 16) Returns the commom directory path for specified array of full filenames.
