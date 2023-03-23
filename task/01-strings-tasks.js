@@ -81,6 +81,19 @@ function getStringFromTemplate(firstName, lastName) {
 
 getStringFromTemplate('Valentin', 'Turuk');
 
+// Lodash #1
+function getStringFromTemplateLo(firstName, lastName) {
+    return _.replace('Hello, Name Surname!', 'Name Surname', `${firstName} ${lastName}`);
+}
+
+
+// Lodash #2
+function getStringFromTemplateLoTwo(firstName, lastName) {
+    const greeting = _.template('Hello, <%= client %>!');
+    return greeting({ 'client': `${firstName} ${lastName}` });
+}
+
+
 /**
  * 4) Extracts a name from template string 'Hello, First_Name Last_Name!'.
  *
@@ -137,6 +150,14 @@ function removeLeadingAndTrailingWhitespaces(value) {
 
 removeLeadingAndTrailingWhitespaces('\tHello, World!   ');
 
+// Lodash
+function removeLeadingAndTrailingWhitespacesLo(value) {
+    return _.trim(value)
+}
+
+
+
+
 /**
  * 7) Returns a string that repeated the specified number of times.
  *
@@ -155,6 +176,11 @@ function repeatString(value, count) {
 }
 
 repeatString('Valentin', 2)
+
+// Lodash
+function repeatStringLo(value, count) {
+    return _.repeat(value, count);
+}
 
 /**
  * 8) Remove the first occurrence of string inside another string
@@ -176,6 +202,12 @@ function removeFirstOccurrences(str, value) {
 
 removeFirstOccurrences('I like legends', 'end');
 
+// Lodash
+function removeFirstOccurrencesLo(str, value) {
+    return _.replace(str, value, '');
+}
+
+
 /**
  * 9) Remove the first and last angle brackets from tag string
  *
@@ -194,6 +226,11 @@ function unbracketTag(str) {
 }
 
 unbracketTag('<Valentin>');
+
+// Lodash
+function unbracketTagLo(str) {
+    return _.trim(str, '<>')
+}
 
 
 /**
@@ -214,6 +251,12 @@ function convertToUpperCase(str) {
 
 convertToUpperCase('Valentin');
 
+// Lodash
+function convertToUpperCaseLo(str) {
+    return _.toUpper(str);
+}
+
+
 /**
  * 11) Extracts e-mails from single string with e-mails list delimeted by semicolons
  *
@@ -231,6 +274,12 @@ function extractEmails(str) {
 }
 
 extractEmails('angus.young@gmail.com;brian.johnson@hotmail.com;bon.scott@yahoo.com');
+
+// Lodash
+function extractEmailsLo(str) {
+    return _.split(str, ';');
+}
+
 
 /**
  * 12) Returns the string representation of rectangle with specified width and height
@@ -267,6 +316,16 @@ function getRectangleString(width, height) {
 
 getRectangleString(20, 13);
 
+
+// Lodash
+
+function getRectangleStringLo(width, height) {
+    const top = '┌' + _.repeat('─', width - 2) + '┐\n';
+    const bottom = '└' + _.repeat('─', width - 2) + '┘';
+    const middle = '│' + _.repeat(' ', width - 2) + '│\n';
+    const figure = `${top}${_.repeat(middle, height - 2)}${bottom}`;
+    console.log(figure);
+}
 
 /**
  * 13) Encode specified string with ROT13 cipher
