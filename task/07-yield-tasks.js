@@ -10,7 +10,7 @@
 
 
 /**
- * Returns the lines sequence of "99 Bottles of Beer" song:
+ * 1) Returns the lines sequence of "99 Bottles of Beer" song:
  *
  *  '99 bottles of beer on the wall, 99 bottles of beer.'
  *  'Take one down and pass it around, 98 bottles of beer on the wall.'
@@ -33,12 +33,25 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    let quantity = 99
+    while (quantity > 2) {
+        yield `${quantity} bottles of beer on the wall, ${quantity} bottles of beer.`;
+        yield `Take one down and pass it around, ${quantity - 1} bottles of beer on the wall.`;
+        quantity--;
+    }
+    yield `${quantity} bottles of beer on the wall, ${quantity} bottles of beer.`;
+    yield `Take one down and pass it around, ${quantity - 1} bottle of beer on the wall.`;
+    quantity--;
+    yield `${quantity} bottle of beer on the wall, ${quantity} bottle of beer.`;
+    yield `Take one down and pass it around, no more bottles of beer on the wall.`;
+    yield `No more bottles of beer on the wall, no more bottles of beer.`;
+    yield `Go to the store and buy some more, 99 bottles of beer on the wall.`;
+    quantity--;
 }
 
 
 /**
- * Returns the Fibonacci sequence:
+ * 2) Returns the Fibonacci sequence:
  *   0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, ...
  *
  * See more at: https://en.wikipedia.org/wiki/Fibonacci_number
@@ -47,12 +60,23 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    let numberOne = 0;
+    let numberTwo = 1;
+
+    yield numberOne;
+    yield numberTwo;
+
+    for (let i = 0; i < 1; i) {
+        let sum = numberOne + numberTwo;
+        yield sum;
+        numberOne = numberTwo;
+        numberTwo = sum;
+    }
 }
 
 
 /**
- * Traverses a tree using the depth-first strategy
+ * 3) Traverses a tree using the depth-first strategy
  * See details: https://en.wikipedia.org/wiki/Depth-first_search
  *
  * Each node have child nodes in node.children array.
@@ -82,12 +106,19 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+    yield root.n;
+
+    if (root.children) {
+        for (let a = 0; a < root.children.length; ++a) {
+            depthTraversalTree(root.children[a]);
+
+        }
+    }
 }
 
 
 /**
- * Traverses a tree using the breadth-first strategy
+ * 4) Traverses a tree using the breadth-first strategy
  * See details: https://en.wikipedia.org/wiki/Breadth-first_search
  *
  * Each node have child nodes in node.children array.
@@ -109,11 +140,12 @@ function* depthTraversalTree(root) {
  */
 function* breadthTraversalTree(root) {
     throw new Error('Not implemented');
+
 }
 
 
 /**
- * Merges two yield-style sorted sequences into the one sorted sequence.
+ * 5) Merges two yield-style sorted sequences into the one sorted sequence.
  * The result sequence consists of sorted items from source iterators.
  *
  * @params {Iterable.<number>} source1
@@ -126,7 +158,15 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    const arr1 = Array.from(source1);
+    const arr2 = Array.from(source2);
+
+    const sortArray = arr1.concat(arr2).sort((a, b) => a - b);
+
+    for (let i; i<sortArray.length; ++i) {
+        yield i;
+    }
+
 }
 
 

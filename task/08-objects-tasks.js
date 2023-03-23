@@ -10,7 +10,7 @@
 
 
 /**
- * Returns the rectagle object with width and height parameters and getArea() method
+ * 1) Returns the rectagle object with width and height parameters and getArea() method
  *
  * @param {number} width
  * @param {number} height
@@ -23,12 +23,17 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+    this.width = width;
+    this.height = height;
+    this.getArea = function () {
+        return this.width * this.height;
+    }
 }
 
+const r = new Rectangle(10, 20);
 
 /**
- * Returns the JSON representation of specified object
+ * 2) Returns the JSON representation of specified object
  *
  * @param {object} obj
  * @return {string}
@@ -38,12 +43,14 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+    const jsonObject = JSON.stringify(obj);
+    return jsonObject;
 }
 
+getJSON({ width: 10, height: 20 });
 
 /**
- * Returns the object of specified type from JSON representation
+ * 3) Returns the object of specified type from JSON representation
  *
  * @param {Object} proto
  * @param {string} json
@@ -54,8 +61,14 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+    const object = JSON.parse(json);
+    const arr = Object.values(object);
+    const jsObject = new proto.constructor(...arr);
+
+    return jsObject;
 }
+
+fromJSON(Rectangle.prototype, '{"width":10, "height":20}');
 
 
 /**
@@ -107,34 +120,106 @@ function fromJSON(proto, json) {
  */
 
 const cssSelectorBuilder = {
+    elementValue: '',
+    idValue: '',
+    classValue: '',
+    attrValue: '',
+    pseudoClassValue: '',
+    pseudoElementValue: '',
+    selectorOne: '',
+    combinator: '',
+    selectorTwo: '',
 
-    element: function(value) {
-        throw new Error('Not implemented');
+    stringify: function () {
+        const cssSelector = `${this.elementValue}${this.idValue}${this.classValue}${this.attrValue}${this.pseudoClassValue}${this.pseudoElementValue}${this.selectorOne}${this.combinator}${this.selectorTwo}`;
+        this.elementValue = '';
+        this.idValue = '';
+        this.classValue = '';
+        this.attrValue = '';
+        this.pseudoClassValue = '';
+        this.pseudoElementValue = '';
+        this.selector1 = '';
+        this.combinator = '';
+        this.selector2 = '';
+        return cssSelector;
     },
 
-    id: function(value) {
-        throw new Error('Not implemented');
+    element: function (value) {
+        if (!this.idValue && !this.classValue && !this.attrValue && !this.pseudoClassValue && !this.pseudoElementValue) {
+            if (!this.elementValue) {
+                this.elementValue = value;
+            } else throw new Error("Element, id and pseudo-element should not occur more then one time inside the selector");
+
+            return cssSelectorBuilder;
+
+        } else throw new Error("Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element");
     },
 
-    class: function(value) {
-        throw new Error('Not implemented');
+    id: function (value) {
+        if (!this.classValue && !this.attrValue && !this.pseudoClassValue && !this.pseudoElementValue) {
+            if (!this.idValue) {
+                this.idValue = `#${value}`;
+            } else throw new Error("Element, id and pseudo-element should not occur more then one time inside the selector");
+
+            return cssSelectorBuilder;
+
+        } else throw new Error("Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element");
     },
 
-    attr: function(value) {
-        throw new Error('Not implemented');
+    class: function (value) {
+        if (!this.attrValue && !this.pseudoClassValue && !this.pseudoElementValue) {
+            this.classValue = `${this.classValue}.${value}`;
+
+            return cssSelectorBuilder;
+
+        } else throw new Error("Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element");
     },
 
-    pseudoClass: function(value) {
-        throw new Error('Not implemented');
+    attr: function (value) {
+        if (!this.pseudoClassValue && !this.pseudoElementValue) {
+            this.attrValue = `${this.attrValue}[${value}]`;
+
+            return cssSelectorBuilder;
+
+        } else throw new Error("Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element");
     },
 
-    pseudoElement: function(value) {
-        throw new Error('Not implemented');
+    pseudoClass: function (value) {
+        if (!this.pseudoElementValue) {
+            this.pseudoClassValue = `${this.pseudoClassValue}:${value}`;
+
+            return cssSelectorBuilder;
+
+        } else throw new Error("Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element");
     },
 
-    combine: function(selector1, combinator, selector2) {
-        throw new Error('Not implemented');
+    pseudoElement: function (value) {
+        if (!this.pseudoElementValue) {
+            this.pseudoElementValue = `::${value}`;
+        } else throw new Error("Element, id and pseudo-element should not occur more then one time inside the selector");
+
+        return cssSelectorBuilder;
     },
+
+    combine: function (selectorOne, combinator, selectorTwo) {
+        this.selectorOne = selectorOne.collect();
+        this.combinator = combinator;
+        this.selectorTwo = selectorTwo.collect();
+
+        return cssSelectorBuilder;
+    },
+
+    collect: function () {
+        const cssSelectorForCombine = `${this.elementValue}${this.idValue}${this.classValue}${this.attrValue}${this.pseudoClassValue}${this.pseudoElementValue}`;
+        this.elementValue = '';
+        this.idValue = '';
+        this.classValue = '';
+        this.attrValue = '';
+        this.pseudoClassValue = '';
+        this.pseudoElementValue = '';
+        return cssSelectorForCombine;
+    },
+
 };
 
 

@@ -12,7 +12,7 @@
 
 
 /**
- * Returns the functions composition of two specified functions f(x) and g(x).
+ * 1) Returns the functions composition of two specified functions f(x) and g(x).
  * The result of compose is to be a function of one argument, (lets call the argument x),
  * which works like applying function f to the result of applying function g to x, i.e.
  *  getComposition(f,g)(x) = f(g(x))
@@ -25,13 +25,16 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.acos(x))
  *
  */
-function getComposition(f,g) {
-    throw new Error('Not implemented');
+function getComposition(f, g) {
+    return function resulrFunction(x) {
+        const resultG = g(x);
+        return f(resultG);
+    }
 }
 
 
 /**
- * Returns the math power function with the specified exponent
+ * 2) Returns the math power function with the specified exponent
  *
  * @param {number} exponent
  * @return {Function}
@@ -47,12 +50,15 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    throw new Error('Not implemented');
+    return function power(x) {
+        const fitstResult = x ** exponent;
+        return fitstResult;
+    }
 }
 
 
 /**
- * Returns the polynom function of one argument based on specified coefficients.
+ * 3) Returns the polynom function of one argument based on specified coefficients.
  * See: https://en.wikipedia.org/wiki/Polynomial#Definition
  *
  * @params {integer}
@@ -64,13 +70,28 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-    throw new Error('Not implemented');
+function getPolynom(a, b, c) {
+
+    if (c) {
+        return function polynom(x) {
+            return a * x ** 2 + b * x + c;
+        }
+    } else if (b) {
+        return function polynom(x) {
+            return a * x + b;
+        }
+    } else if (a) {
+        return function polynom(x) {
+            return a;
+        }
+    } return null
+
 }
 
 
+
 /**
- * Memoizes passed function and returns function
+ * 4) Memoizes passed function and returns function
  * which invoked first time calls the passed function and then always returns cached result.
  *
  * @params {Function} func - function to memoize
@@ -84,12 +105,19 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+    let value;
+    function worker() {
+        if (!value) {
+            value = func();
+            return value;
+        } return value;
+    }
+    return worker;
 }
 
 
 /**
- * Returns the function trying to call the passed function and if it throws,
+ * 5) Returns the function trying to call the passed function and if it throws,
  * retrying it specified number of attempts.
  *
  * @param {Function} func
@@ -104,12 +132,22 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-    throw new Error('Not implemented');
+
+    function processor() {
+        for (let i = 0; i < attempts; ++i) {
+            try {
+                func()
+                return func()
+            } catch {
+            }
+        }
+    }
+    return processor;
 }
 
 
 /**
- * Returns the logging wrapper for the specified method,
+ * 6) Returns the logging wrapper for the specified method,
  * Logger has to log the start and end of calling the specified function.
  * Logger has to log the arguments of invoked function.
  * The fromat of output log is:
@@ -132,12 +170,22 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-    throw new Error('Not implemented');
+    let mainLog = []
+
+    return function recorder(...arg) {
+        let call = [];
+        call.push(logFunc(`${func.name}(${arg}) starts`));
+        call.push(logFunc(`${func.name}(${arg}) ends`));
+        mainLog.push(call)
+
+        return func(arg);
+    }
 }
 
 
+
 /**
- * Return the function with partial applied arguments
+ * 7) Return the function with partial applied arguments
  *
  * @param {Function} fn
  * @return {Function}
@@ -150,12 +198,23 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn) {
-    throw new Error('Not implemented');
+    let secondLevelString = '';
+
+    for (let i = 1; i < arguments.length; ++i) {
+        secondLevelString += arguments[i]
+    }
+
+    return function allArg(fn) {
+        for (let i = 0; i < arguments.length; ++i) {
+            secondLevelString += arguments[i]
+        }
+        return secondLevelString;
+    }
 }
 
 
 /**
- * Returns the id generator function that returns next integer starting from specified number every time when invoking.
+ * 8) Returns the id generator function that returns next integer starting from specified number every time when invoking.
  *
  * @param {Number} startFrom
  * @return {Function}
@@ -171,7 +230,12 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    throw new Error('Not implemented');
+    let value = startFrom - 1;
+    function worker() {
+        value += 1
+        return value;
+    }
+    return worker;
 }
 
 
