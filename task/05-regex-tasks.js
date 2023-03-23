@@ -9,7 +9,7 @@
 
 
 /**
- * Returns the regexp that matches a GUID string representation
+ * 1) Returns the regexp that matches a GUID string representation
  * '{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}',
  * where X is hexadecimal digit (0,1,2...,9,A,a,B,b,C,c,D,d,F,f)
  *
@@ -31,12 +31,17 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-   throw new Error('Not implemented');
-}
+   const regexp = /{[A-Za-z0-9]{8}(-[A-Za-z0-9]{4}){3}-\d[A-Za-z0-9]{11}}/;
+   return regexp;
+};
+
+getRegexForGuid('{3F2504E0-4F89-41D3-9A0C-0305E82C3301}');
+
+
 
 
 /**
- * Returns the regexp that matches all the strings from first column
+ * 2) Returns the regexp that matches all the strings from first column
  * but of them from the second
  *
  * Match :                 Do not match:
@@ -53,12 +58,13 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-   throw new Error('Not implemented');
+   const regexp = /p.t/;
+   return regexp;
 }
 
 
 /**
- * Returns the regexp that matches all IPv4 strings in
+ * 3) Returns the regexp that matches all IPv4 strings in
  * 'XX.XX.XX.XX' dotted format where XX is number 0 to 255
  *
  * Valid IPv4:                       Invalid IPv4
@@ -72,12 +78,13 @@ function getRegexForPitSpot() {
  * @return {RegExp}
  */
 function getRegexForIPv4() {
-   throw new Error('Not implemented');
+   const regexp = /^(([0-9]|00[0-9]|[1-9][0-9]|0[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|00[0-9]|[1-9][0-9]|0[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/
+   return regexp;
 }
 
 
 /**
- * Returns the regexp that matches all SSN (Social Security Number) codes in
+ * 4) Returns the regexp that matches all SSN (Social Security Number) codes in
  * 'XXX-XX-XXXX' format where X is digit, where each group can't be all zeros
  * https://en.wikipedia.org/wiki/Social_Security_number
  *
@@ -91,12 +98,13 @@ function getRegexForIPv4() {
  * @return {RegExp}
  */
 function getRegexForSSN() {
-   throw new Error('Not implemented');
+   const regexp = /^\d{2}((?<!00)\d|(?<=00)[1-9])-\d((?<!0)\d|(?<=0)[1-9])-\d{3}((?<!000)\d|(?<=000)[1-9])$/;
+   return regexp;
 }
 
 
 /**
- * Returns the password validator regex.
+ * 5) Returns the password validator regex.
  * Regex will validate a password to make sure it meets the follwing criteria:
  *  - At least specified characters long (argument minLength)
  *  - Contains a lowercase letter
@@ -116,14 +124,15 @@ function getRegexForSSN() {
  *   'Pa55'.match(validator) => false
  */
 function getPasswordValidator(minLength) {
-   throw new Error('Not implemented');
+   const regexp = new RegExp(`^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[A-Za-z0-9]{${minLength},}`);
+   return regexp;
 }
 
 
 module.exports = {
-    getRegexForGuid: getRegexForGuid,
-    getRegexForPitSpot: getRegexForPitSpot,
-    getRegexForIPv4: getRegexForIPv4,
-    getRegexForSSN: getRegexForSSN,
-    getPasswordValidator: getPasswordValidator
+   getRegexForGuid: getRegexForGuid,
+   getRegexForPitSpot: getRegexForPitSpot,
+   getRegexForIPv4: getRegexForIPv4,
+   getRegexForSSN: getRegexForSSN,
+   getPasswordValidator: getPasswordValidator
 };
