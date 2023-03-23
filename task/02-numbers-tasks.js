@@ -29,6 +29,11 @@ function getRectangleArea(width, height) {
 
 getRectangleArea(12, 12);
 
+// Lodash
+
+function getRectangleAreaLo(width, height) {
+    return _.multiply(width, height)
+}
 
 /**
  * 2) Returns a circumference of circle given by radius.
@@ -49,6 +54,13 @@ function getCicleCircumference(radius) {
 
 getCicleCircumference(5);
 
+
+// Lodash
+function getCicleCircumferenceLo(radius) {
+    return 2 * _.multiply(Math.PI, radius);
+}
+
+
 /**
  * 3) Returns an average of two given numbers.
  *
@@ -68,6 +80,12 @@ function getAverage(value1, value2) {
 }
 
 getAverage(-3, 5);
+
+// Lodash
+function getAverageLo(value1, value2) {
+    return _.mean([value1, value2]);
+}
+
 
 /**
  * 4) Returns a distance beetween two points by cartesian coordinates.
@@ -92,6 +110,12 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
 
 getDistanceBetweenPoints(-5, 0, 10, -10)
 
+// Lodash
+function getDistanceBetweenPointsLo(x1, y1, x2, y2) {
+    return Math.sqrt(_.sum([Math.pow(_.subtract(x1, x2), 2), Math.pow(_.subtract(y2, y1), 2)]));
+}
+
+
 /**
  * 5) Returns a root of linear equation a*x + b = 0 given by coefficients a and b.
  *
@@ -111,6 +135,11 @@ function getLinearEquationRoot(a, b) {
 }
 
 getLinearEquationRoot(5, 0)
+
+// Lodash
+function getLinearEquationRootLo(a, b) {
+    return _.divide(_.subtract(0, b), a);
+}
 
 
 /**
@@ -140,6 +169,14 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
 
 getAngleBetweenVectors(1, 3, 4, 2);
 
+// Lodash
+function getAngleBetweenVectorsLo(x1, y1, x2, y2) {
+    const cos = _.divide(_.sum([_.multiply(x1, x2), _.multiply(y1, y2)]), _.multiply(Math.sqrt(_.sum([Math.pow(x1, 2), Math.pow(y1, 2)])), Math.sqrt(_.sum([Math.pow(x2, 2), Math.pow(y2, 2)]))));
+    const angleRadians = Math.acos(cos);
+    return angleRadians
+}
+
+
 /**
  * 7) Returns a last digit of a integer number.
  *
@@ -159,6 +196,11 @@ function getLastDigit(value) {
 }
 
 getLastDigit(2654);
+
+// Lodash
+function getLastDigitLo(value) {
+    return _.toString(value).slice(-1);
+}
 
 
 /**
@@ -180,6 +222,12 @@ function parseNumberFromString(value) {
 
 parseNumberFromString('-525.5');
 
+// Lodash
+function parseNumberFromStringLo(value) {
+    return _.toNumber(value);
+}
+
+
 /**
  * 9) Returns a diagonal length of the rectangular parallelepiped given by its sides a,b,c.
  *
@@ -200,6 +248,12 @@ function getParallelipidedDiagonal(a, b, c) {
 }
 
 getParallelipidedDiagonal(1, 2, 3)
+
+// Lodash
+function getParallelipidedDiagonalLo(a, b, c) {
+    return Math.sqrt(_.sum([Math.pow(a, 2), Math.pow(b, 2), Math.pow(c, 2)]));
+}
+
 
 /**
  * 10) Returns the number rounded to specified power of 10.
@@ -225,6 +279,12 @@ function roundToPowerOfTen(num, pow) {
 }
 
 roundToPowerOfTen(1678, 3);
+
+// Lodash
+function roundToPowerOfTenLo(num, pow) {
+    return _.round(num, -pow);
+}
+
 
 /**
  * 11) Returns true is the number is prime; otherwise false.
@@ -283,6 +343,12 @@ function toNumber(value, def) {
 }
 
 toNumber('test', 0);
+
+// Lodash
+function toNumberLo(value, def) {
+    return _.toNumber(value) || def;
+ }
+
 
 module.exports = {
     getRectangleArea: getRectangleArea,
