@@ -10,7 +10,7 @@
 
 
 /**
- * Returns the result of concatenation of two strings.
+ * 1) Returns the result of concatenation of two strings.
  *
  * @param {string} value1
  * @param {string} value2
@@ -21,13 +21,28 @@
  *   'aa',''    => 'aa'
  *   '',  'bb'  => 'bb'
  */
+
+// JS - #1
+
 function concatenateStrings(value1, value2) {
-    throw new Error('Not implemented');
+    if (typeof value1 === 'string' && typeof value2 === 'string') {
+        return value1 + value2;
+    } throw new Error('Entered data is invalid');
 }
+
+concatenateStrings('aaa', 'bbb');
+
+// JS - #2
+
+function concatenateStringsSecond(value1, value2) {
+    return value1.concat(value2);
+}
+
+concatenateStringsSecond('aaa', 'bbb');
 
 
 /**
- * Returns the length of given string.
+ * 2) Returns the length of given string.
  *
  * @param {string} value
  * @return {number}
@@ -38,11 +53,15 @@ function concatenateStrings(value1, value2) {
  *   ''      => 0
  */
 function getStringLength(value) {
-    throw new Error('Not implemented');
+    if (typeof value === 'string') {
+        return value.length;
+    } throw new Error('Entered data is invalid')
 }
 
+getStringLength('eightttt');
+
 /**
- * Returns the result of string template and given parameters firstName and lastName.
+ * 3) Returns the result of string template and given parameters firstName and lastName.
  * Please do not use concatenation, use template string :
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings
  *
@@ -55,11 +74,28 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    throw new Error('Not implemented');
+    if (typeof firstName === 'string' && typeof lastName === 'string') {
+        return (`Hello, ${firstName} ${lastName}!`);
+    } throw new Error('Entered data is invalid')
 }
 
+getStringFromTemplate('Valentin', 'Turuk');
+
+// Lodash #1
+function getStringFromTemplateLo(firstName, lastName) {
+    return _.replace('Hello, Name Surname!', 'Name Surname', `${firstName} ${lastName}`);
+}
+
+
+// Lodash #2
+function getStringFromTemplateLoTwo(firstName, lastName) {
+    const greeting = _.template('Hello, <%= client %>!');
+    return greeting({ 'client': `${firstName} ${lastName}` });
+}
+
+
 /**
- * Extracts a name from template string 'Hello, First_Name Last_Name!'.
+ * 4) Extracts a name from template string 'Hello, First_Name Last_Name!'.
  *
  * @param {string} value
  * @return {string}
@@ -69,12 +105,16 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    throw new Error('Not implemented');
+    if (typeof value === 'string') {
+        return value.slice(7, -1);
+    } throw new Error('Entered data is invalid');
 }
+
+extractNameFromTemplate('Hello, Valentin Turuk!');
 
 
 /**
- * Returns a first char of the given string.
+ * 5) Returns a first char of the given string.
  *
  * @param {string} value
  * @return {string}
@@ -84,11 +124,15 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-    throw new Error('Not implemented');
+    if (typeof value === 'string') {
+        return value.substr(0, 1);
+    } throw new Error('Entered data is invalid');
 }
 
+getFirstChar('Valentin Turuk');
+
 /**
- * Removes a leading and trailing whitespace characters from string.
+ * 6) Removes a leading and trailing whitespace characters from string.
  *
  * @param {string} value
  * @return {string}
@@ -99,11 +143,23 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    throw new Error('Not implemented');
+    if (typeof value === 'string') {
+        return value.trim();
+    } throw new Error('Entered data is invalid');
 }
 
+removeLeadingAndTrailingWhitespaces('\tHello, World!   ');
+
+// Lodash
+function removeLeadingAndTrailingWhitespacesLo(value) {
+    return _.trim(value)
+}
+
+
+
+
 /**
- * Returns a string that repeated the specified number of times.
+ * 7) Returns a string that repeated the specified number of times.
  *
  * @param {string} value
  * @param {string} count
@@ -114,11 +170,20 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    throw new Error('Not implemented');
+    if (typeof value === 'string' && typeof count === 'number') {
+        return value.repeat(count);
+    } throw new Error('Entered data is invalid');
+}
+
+repeatString('Valentin', 2)
+
+// Lodash
+function repeatStringLo(value, count) {
+    return _.repeat(value, count);
 }
 
 /**
- * Remove the first occurrence of string inside another string
+ * 8) Remove the first occurrence of string inside another string
  * 
  * @param {string} str
  * @param {string} value
@@ -130,11 +195,21 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+    if (typeof str === 'string' && typeof value === 'string') {
+        return str.replace(value, '');
+    } throw new Error('Entered data is invalid')
 }
 
+removeFirstOccurrences('I like legends', 'end');
+
+// Lodash
+function removeFirstOccurrencesLo(str, value) {
+    return _.replace(str, value, '');
+}
+
+
 /**
- * Remove the first and last angle brackets from tag string
+ * 9) Remove the first and last angle brackets from tag string
  *
  * @param {string} str
  * @return {string}
@@ -145,12 +220,21 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+    if (typeof str === 'string') {
+        return str.slice(1, -1);
+    } throw new Error('Entered data is invalid');
+}
+
+unbracketTag('<Valentin>');
+
+// Lodash
+function unbracketTagLo(str) {
+    return _.trim(str, '<>')
 }
 
 
 /**
- * Converts all characters of the specified string into the upper case
+ * 10) Converts all characters of the specified string into the upper case
  *
  * @param {string} str
  * @return {string}
@@ -160,11 +244,21 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+    if (typeof str === 'string') {
+        return str.toUpperCase();
+    } throw new Error('Entered data is invalid');
 }
 
+convertToUpperCase('Valentin');
+
+// Lodash
+function convertToUpperCaseLo(str) {
+    return _.toUpper(str);
+}
+
+
 /**
- * Extracts e-mails from single string with e-mails list delimeted by semicolons
+ * 11) Extracts e-mails from single string with e-mails list delimeted by semicolons
  *
  * @param {string} str
  * @return {array}
@@ -174,11 +268,21 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+    if (typeof str === 'string') {
+        return str.split(';');
+    } throw new Error('Entered data is invalid');
 }
 
+extractEmails('angus.young@gmail.com;brian.johnson@hotmail.com;bon.scott@yahoo.com');
+
+// Lodash
+function extractEmailsLo(str) {
+    return _.split(str, ';');
+}
+
+
 /**
- * Returns the string representation of rectangle with specified width and height
+ * 12) Returns the string representation of rectangle with specified width and height
  * using pseudograhic chars
  *
  * @param {number} width
@@ -201,12 +305,30 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+    if (typeof width === 'number' && typeof height === 'number') {
+        const top = '┌' + '─'.repeat(width - 2) + '┐\n';
+        const bottom = '└' + '─'.repeat(width - 2) + '┘\n';
+        const middle = '│' + ' '.repeat(width - 2) + '│\n';
+        const figure = `${top}${middle.repeat(height - 2)}${bottom}`;
+        return figure;
+    } throw new Error('Entered data is invalid');
 }
 
+getRectangleString(20, 13);
+
+
+// Lodash
+
+function getRectangleStringLo(width, height) {
+    const top = '┌' + _.repeat('─', width - 2) + '┐\n';
+    const bottom = '└' + _.repeat('─', width - 2) + '┘';
+    const middle = '│' + _.repeat(' ', width - 2) + '│\n';
+    const figure = `${top}${_.repeat(middle, height - 2)}${bottom}`;
+    console.log(figure);
+}
 
 /**
- * Encode specified string with ROT13 cipher
+ * 13) Encode specified string with ROT13 cipher
  * See details:  https://en.wikipedia.org/wiki/ROT13
  *
  * @param {string} str
@@ -221,11 +343,34 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    if (typeof str === 'string') {
+        let iteration = [];
+        for (let i of str) {
+            let letter = String.fromCodePoint(i.charCodeAt() + 13);
+            if (i >= 'A' && i <= 'Z' && letter <= 'Z') {
+                iteration.push(letter);
+            } else if (i >= 'A' && i <= 'Z' && letter > 'Z') {
+                letter = String.fromCodePoint(i.charCodeAt() - 13);
+                iteration.push(letter);
+            } else if (i >= 'a' && i <= 'z' && letter <= 'z') {
+                iteration.push(letter);
+            } else if (i >= 'a' && i <= 'z' && letter > 'z') {
+                letter = String.fromCodePoint(i.charCodeAt() - 13);
+                iteration.push(letter);
+            } else {
+                letter = i;
+                iteration.push(letter);
+            }
+        }
+        const result = iteration.join('');
+        return result;
+    } throw new Error('Entered data is invalid');
 }
 
+encodeToRot13('Gb trg gb gur bgure fvqr!');
+
 /**
- * Returns true if the value is string; otherwise false.
+ * 14) Returns true if the value is string; otherwise false.
  * @param {string} value
  * @return {boolean}
  *
@@ -238,12 +383,16 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    if (value !== undefined && value !== null && value !== NaN) {
+        return typeof (value.valueOf()) === 'string'
+    } return false
 }
+
+isString('Valentin');
 
 
 /**
- * Returns playid card id.
+ * 15) Returns playid card id.
  * 
  * Playing cards inittial deck inclides the cards in the following order:
  * 
@@ -267,8 +416,16 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    throw new Error('Not implemented');
+    if (typeof value === 'string') {
+        const cardDeck = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+            'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+            'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+            'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+        return cardDeck.indexOf(value)
+    } throw new Error('Entered data is invalid');
 }
+
+getCardId('7♦');
 
 
 module.exports = {
